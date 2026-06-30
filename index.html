@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanar Vision — Strategic Video Growth Systems</title>
+    <meta name="description" content="We engineer high-performance video, thumbnails, and growth strategy into one comprehensive organic engine. Scale reach, leads, and revenue in 90 days.">
+    <!-- Google Fonts: Inter & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- 1. NAVBAR -->
+    <header class="vv-navbar" id="navbar">
+        <div class="vv-nav-container">
+            <a href="#hero" class="vv-logo">
+                <span class="vv-logo-gradient">VANAR</span>VISION
+            </a>
+            
+            <!-- Desktop Navigation links populated dynamically -->
+            <nav class="vv-nav-menu" id="nav-menu"></nav>
+
+            <div class="vv-nav-cta">
+                <a href="#contact-section" class="vv-btn vv-btn-primary">Book Consultation</a>
+                <button class="vv-hamburger" id="hamburger-toggle" aria-label="Toggle Menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="vv-mobile-drawer" id="mobile-drawer">
+        <nav class="vv-mobile-nav" id="mobile-nav"></nav>
+        <div class="vv-mobile-cta">
+            <a href="#contact-section" class="vv-btn vv-btn-primary vv-btn-block">Book Consultation</a>
+        </div>
+    </div>
+    <div class="vv-drawer-overlay" id="drawer-overlay"></div>
+
+    <main>
+        
+        <!-- 2. HERO SECTION -->
+        <section class="vv-hero" id="hero">
+            <!-- Hero Video Background -->
+            <div class="vv-hero-video-wrapper">
+                <video class="vv-hero-video" autoplay muted loop playsinline preload="auto">
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-data-41617-large.mp4" type="video/mp4">
+                </video>
+                <div class="vv-hero-video-overlay"></div>
+            </div>
+            
+            <div class="vv-container vv-hero-content">
+                <span class="vv-badge-eyebrow">Organic Growth Engine</span>
+                <h1 class="vv-hero-title">
+                    <span class="vv-gradient-text">Strategic Content</span> Ecosystem Engineered for <span class="vv-gradient-text">Growth</span>
+                </h1>
+                <p class="vv-hero-subtitle">
+                    We craft high-performance videos, thumbnails, and strategies—all in one growth-driven system designed to scale your engagement, leads, and brand in just 90 days.
+                </p>
+                <div class="vv-hero-actions">
+                    <a href="#testimonials" class="vv-btn vv-btn-primary">View Case Studies</a>
+                    <a href="#portfolio" class="vv-btn vv-btn-outline">See Our Work</a>
+                </div>
+                <div class="vv-hero-press">
+                    <p>Also featured in <a href="#trust" class="vv-press-link">Creator Ledger</a> and <a href="#trust" class="vv-press-link">SaaS Business Monthly</a> — Click to read</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MARQUEE SECTION #1 -->
+        <section class="vv-marquee-section">
+            <div class="vv-marquee-container" id="marquee-1">
+                <!-- Dynamically populated inside script.js -->
+            </div>
+        </section>
+
+        <!-- 4. STATS SECTION -->
+        <section class="vv-stats-section" id="stats">
+            <div class="vv-container">
+                <div class="vv-stats-grid" id="stats-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- MARQUEE SECTION #2 (Duplicate) -->
+        <section class="vv-marquee-section">
+            <div class="vv-marquee-container vv-marquee-right" id="marquee-2">
+                <!-- Dynamically populated inside script.js -->
+            </div>
+        </section>
+
+        <!-- 5. TRUST SECTION -->
+        <section class="vv-trust-section" id="trust">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Trusted Partnership</span>
+                    <h2 class="vv-section-title">Real Stories. Real Results. Real Growth.</h2>
+                    <p class="vv-section-desc">
+                        Join the growing community of successful creators and brands who trust our proven strategies to accelerate their digital presence.
+                    </p>
+                </div>
+
+                <!-- Secondary Stats Row -->
+                <div class="vv-trust-stats-row" id="trust-stats-container">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Press Collapsible -->
+                <div class="vv-press-dropdown-container">
+                    <button class="vv-press-toggle-btn" id="press-toggle" aria-expanded="false" aria-controls="press-content">
+                        📰 Featured in News <span class="vv-chevron">▼</span>
+                    </button>
+                    <div class="vv-press-content" id="press-content" aria-hidden="true">
+                        <div class="vv-press-grid" id="press-grid">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vv-trust-actions">
+                    <a href="#testimonials" class="vv-btn vv-btn-primary">🎥 Client Testimonials</a>
+                    <a href="#portfolio" class="vv-btn vv-btn-outline">📊 Case Studies</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. VIDEO SHOWCASE GRID #1 -->
+        <section class="vv-showcase-section" id="portfolio">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Portfolio</span>
+                    <h2 class="vv-section-title">Videos That Grab Attention</h2>
+                </div>
+                <div class="vv-video-grid" id="portfolio-grid">
+                    <!-- Populated dynamically -->
+                </div>
+                <div class="vv-section-footer-cta">
+                    <a href="#contact-section" class="vv-btn vv-btn-outline">View Our Projects →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. VIDEO TESTIMONIALS GRID -->
+        <section class="vv-showcase-section vv-bg-alt" id="testimonials">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Case Studies</span>
+                    <h2 class="vv-section-title">What Our Clients Say</h2>
+                </div>
+                <div class="vv-video-grid vv-video-grid-8" id="testimonials-grid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 6b. VIDEO SHOWCASE GRID #2 (Duplicate Showcase Grid as requested) -->
+        <section class="vv-showcase-section">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Showcase Grid #2</span>
+                    <h2 class="vv-section-title">Performance-Driven Visuals</h2>
+                </div>
+                <div class="vv-video-grid" id="portfolio-grid-2">
+                    <!-- Populated dynamically with reordered video elements in script.js -->
+                </div>
+                <div class="vv-section-footer-cta">
+                    <a href="#contact-section" class="vv-btn vv-btn-outline">Analyze Video Results →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. INTERACTIVE PROCESS TIMELINE -->
+        <section class="vv-process-section" id="process">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Our Process</span>
+                    <h2 class="vv-section-title">Your 9 Steps, 90 Days</h2>
+                    <p class="vv-section-desc">
+                        Transform your content into a lead-generating powerhouse in just 90 days.
+                    </p>
+                </div>
+
+                <!-- Sticky Progress Panel -->
+                <div class="vv-stepper-progress-wrapper vv-glass-card">
+                    <div class="vv-stepper-progress-info">
+                        <span class="vv-stepper-progress" id="stepper-progress-text">Progress 1/9</span>
+                        <span class="vv-stepper-path">Onboarding → 9 Steps → 90 Days → ∞ Results</span>
+                    </div>
+                    <div class="vv-stepper-indicator">
+                        <div class="vv-stepper-progress-bar-bg">
+                            <div class="vv-stepper-progress-bar-fill" id="stepper-progress-fill"></div>
+                        </div>
+                        <div class="vv-stepper-dots-container" id="stepper-dots-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="vv-stepper-progress-cta">
+                        <a href="#pricing" class="vv-stepper-cta-btn">Start Your Journey → ∞ Results</a>
+                    </div>
+                </div>
+
+                <!-- Step Cards List -->
+                <div class="vv-steps-container" id="steps-cards-container">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Ready to Transform CTA Banner -->
+                <div class="vv-cta-banner vv-glass-card">
+                    <h3 class="vv-banner-title">Ready to Transform Your Strategy?</h3>
+                    <p class="vv-banner-desc">Let's start your growth journey today and see measurable results in just 90 days.</p>
+                    <a href="#contact-section" class="vv-btn vv-btn-primary">Start Your Growth Journey</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. PRICING PLANS SECTION -->
+        <section class="vv-pricing-section" id="pricing">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">OUR SERVICES</span>
+                    <h2 class="vv-section-title">Vanar Vision Services</h2>
+                    <p class="vv-section-desc">
+                        Premium video content and growth systems built to expand your reach, boost retention, and scale your brand organically.
+                    </p>
+                </div>
+
+                <!-- Urgency & Guarantee Badges -->
+                <div class="vv-pricing-badges-row">
+                    <span class="vv-badge vv-badge-scarcity">🔥 Only 5 Seats Per Month (quality can't be mass-produced)</span>
+                    <span class="vv-badge vv-badge-guarantee">🛡️ 90-Day Results Guarantee — or work next month free</span>
+                </div>
+
+                <!-- Pricing Cards Container -->
+                <div class="vv-pricing-grid" id="pricing-grid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. BENEFITS BENTO GRID -->
+        <section class="vv-benefits-section" id="benefits">
+            <div class="vv-container">
+                <div class="vv-benefits-wrapper">
+                    <!-- Stacked/Staggered Headline -->
+                    <div class="vv-benefits-header">
+                        <h2 class="vv-benefits-headline">
+                            <span>Our</span>
+                            <span class="vv-gradient-text">Exclusive</span>
+                            <span>Benefits</span>
+                        </h2>
+                    </div>
+
+                    <!-- Asymmetric Bento Grid -->
+                    <div class="vv-bento-grid" id="bento-grid-container">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+                <div class="vv-benefits-cta">
+                    <a href="#contact-section" class="vv-btn vv-btn-primary">Experience These Benefits Now! 🚀</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. FAQ ACCORDION -->
+        <section class="vv-faq-section" id="faq">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">FAQ</span>
+                    <h2 class="vv-section-title">What Clients Ask Us Most</h2>
+                    <p class="vv-section-desc">
+                        Real questions from real clients. Here's what people want to know before partnering with us.
+                    </p>
+                </div>
+
+                <!-- FAQ Accordion Wrapper -->
+                <div class="vv-accordion-group" id="faq-accordion-container">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- FAQ Footer Box -->
+                <div class="vv-faq-footer-box vv-glass-card">
+                    <div class="vv-faq-footer-info">
+                        <h4>Still Have Questions?</h4>
+                        <p>Can't find the answer you're looking for? Our team is here to help. Get in touch and we'll respond within 24 hours.</p>
+                    </div>
+                    <div class="vv-faq-footer-actions">
+                        <a href="#contact-section" class="vv-btn vv-btn-primary">Contact Us</a>
+                        <a href="#contact-section" class="vv-btn vv-btn-outline">Schedule Call</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6/9. FORMS & CONTACT CTAs -->
+        <section class="vv-contact-section" id="contact-section">
+            <div class="vv-container">
+                <div class="vv-contact-grid">
+                    
+                    <!-- Contact/Lead Capture Form -->
+                    <div class="vv-contact-card vv-glass-card">
+                        <h3 class="vv-card-title">Book a Call or Message Us</h3>
+                        <p class="vv-card-sub">Let's discuss how we can engineer a 90-day organic growth funnel for your business.</p>
+                        <form class="vv-form" id="lead-form">
+                            <div class="vv-form-group">
+                                <label for="form-name">Name *</label>
+                                <input type="text" id="form-name" required placeholder="e.g. John Doe">
+                            </div>
+                            <div class="vv-form-group">
+                                <label for="form-email">Email *</label>
+                                <input type="email" id="form-email" required placeholder="e.g. john@company.com">
+                            </div>
+                            <div class="vv-form-group">
+                                <label for="form-phone">Phone</label>
+                                <input type="tel" id="form-phone" placeholder="e.g. +61 400 123 456">
+                            </div>
+                            <div class="vv-form-group">
+                                <label for="form-niche">Niche / Industry *</label>
+                                <select id="form-niche" required>
+                                    <option value="" disabled selected>Select your industry</option>
+                                    <option value="saas">SaaS / Tech</option>
+                                    <option value="ecommerce">E-commerce / Retail</option>
+                                    <option value="fitness">Fitness / Health</option>
+                                    <option value="finance">Finance / Business</option>
+                                    <option value="other">Other Content Creator</option>
+                                </select>
+                            </div>
+                            <div class="vv-form-group">
+                                <label for="form-msg">Message</label>
+                                <textarea id="form-msg" rows="3" placeholder="Tell us about your audience and goals..."></textarea>
+                            </div>
+                            <button type="submit" class="vv-btn vv-btn-primary vv-btn-block">Send Strategy Request</button>
+                        </form>
+                    </div>
+
+                    <!-- Get Custom Quote Form (for Add-ons) -->
+                    <div class="vv-contact-card vv-glass-card" id="quote-form-section">
+                        <h3 class="vv-card-title">Get a Custom Add-Ons Quote</h3>
+                        <p class="vv-card-sub">Interested in premium upgrades like custom website design, management, or rapid filming?</p>
+                        <form class="vv-form" id="quote-form">
+                            <div class="vv-form-group">
+                                <label for="quote-name">Name *</label>
+                                <input type="text" id="quote-name" required placeholder="e.g. Jane Doe">
+                            </div>
+                            <div class="vv-form-group">
+                                <label for="quote-email">Email *</label>
+                                <input type="email" id="quote-email" required placeholder="e.g. jane@brand.com">
+                            </div>
+                            <div class="vv-form-group">
+                                <label>Upgrades Desired (Select all that apply) *</label>
+                                <div class="vv-checkbox-group">
+                                    <label class="vv-checkbox-label">
+                                        <input type="checkbox" name="addons" value="website"> Website Development
+                                    </label>
+                                    <label class="vv-checkbox-label">
+                                        <input type="checkbox" name="addons" value="content"> On-Call Content Creation (1-hr batch)
+                                    </label>
+                                    <label class="vv-checkbox-label">
+                                        <input type="checkbox" name="addons" value="smm"> Social Media Management
+                                    </label>
+                                    <label class="vv-checkbox-label">
+                                        <input type="checkbox" name="addons" value="fast"> Ultra Fast Turnaround
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="vv-btn vv-btn-primary vv-btn-block">Request Custom Quote</button>
+                        </form>
+
+                        <!-- Calendly Embed Placeholder -->
+                        <div class="vv-calendly-block">
+                            <h4>📅 Or Schedule Call Instantly</h4>
+                            <!-- Simulation of Calendly Embed for High-fidelity feel -->
+                            <div class="vv-calendly-mock">
+                                <div class="vv-calendly-mock-header">
+                                    <span>Vanar Vision Growth Session</span>
+                                    <span>30 Mins | Video Call</span>
+                                </div>
+                                <div class="vv-calendly-mock-slots">
+                                    <button type="button" class="vv-slot-btn" onclick="alert('Demo: Call booked! In production, this embeds the Calendly widget.')">Book 10:00 AM</button>
+                                    <button type="button" class="vv-slot-btn" onclick="alert('Demo: Call booked! In production, this embeds the Calendly widget.')">Book 2:00 PM</button>
+                                    <button type="button" class="vv-slot-btn" onclick="alert('Demo: Call booked! In production, this embeds the Calendly widget.')">Book 4:30 PM</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 12. FOOTER -->
+    <footer class="vv-footer">
+        <div class="vv-container">
+            <div class="vv-footer-main">
+                <div class="vv-footer-brand">
+                    <a href="#hero" class="vv-logo">
+                        <span class="vv-logo-gradient">VANAR</span>VISION
+                    </a>
+                    <p class="vv-footer-tagline">
+                        Transforming brands through innovative video content and strategic digital marketing solutions.
+                    </p>
+                    <div class="vv-social-icons">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LN</a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+                    </div>
+                </div>
+
+                <!-- Links Grid -->
+                <div class="vv-footer-links-grid">
+                    <div class="vv-footer-col">
+                        <h4>Services</h4>
+                        <ul id="footer-services-menu"></ul>
+                    </div>
+                    <div class="vv-footer-col">
+                        <h4>Company</h4>
+                        <ul id="footer-company-menu"></ul>
+                    </div>
+                    <div class="vv-footer-col">
+                        <h4>Contact Info</h4>
+                        <p class="vv-contact-item" id="footer-location"></p>
+                        <p class="vv-contact-item"><a href="" id="footer-tel"></a></p>
+                        <p class="vv-contact-item"><a href="" id="footer-email"></a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vv-footer-bottom">
+                <p class="vv-copyright">&copy; 2026 Vanar Vision. All rights reserved.</p>
+                <div class="vv-footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Refund & Cancellation</a>
+                </div>
+            </div>
+            
+            <div class="vv-footer-disclaimer">
+                Disclaimer: The names, testimonials, metrics, and video assets are placeholders for demonstration purposes, to be swapped with direct client assets before official launch.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
