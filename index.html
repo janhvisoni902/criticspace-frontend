@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRITICSPACE — India's Leading Book Marketing, Author Branding & Literary PR Platform</title>
+    <meta name="description" content="We help authors increase visibility through strategic book marketing, literary publicity campaigns, media outreach, digital branding, and audience-building.">
+    <!-- Google Fonts: Inter & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="vertical-marquee.css">
+</head>
+<body>
+
+    <!-- 1. NAVBAR -->
+    <header class="vv-navbar" id="navbar">
+        <div class="vv-nav-container">
+            <div style="display: flex; flex-direction: column;">
+                <a href="#hero" class="vv-logo" style="line-height: 1.1;">
+                    <span class="vv-logo-gradient">CRITIC</span>SPACE
+                </a>
+                <span style="font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; margin-top: 2px; display: block;">Literary PR & Branding</span>
+            </div>
+            
+            <nav class="vv-nav-menu" id="nav-menu">
+                <a href="#hero" class="is-active">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#success-stories">Success Stories</a>
+                <a href="#faq">FAQs</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact-section">Contact</a>
+            </nav>
+
+            <div class="vv-nav-cta">
+                <a href="#contact-section" class="vv-btn vv-btn-primary">Explore Our Services</a>
+                <button class="vv-hamburger" id="hamburger-toggle" aria-label="Toggle Menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="vv-mobile-drawer" id="mobile-drawer">
+        <nav class="vv-mobile-nav" id="mobile-nav">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#success-stories">Success Stories</a>
+            <a href="#faq">FAQs</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact-section">Contact</a>
+        </nav>
+        <div class="vv-mobile-cta" style="margin-top: 2rem; padding: 0 1rem;">
+            <a href="#contact-section" class="vv-btn vv-btn-primary vv-btn-block">Explore Our Services</a>
+        </div>
+    </div>
+    <div class="vv-drawer-overlay" id="drawer-overlay"></div>
+
+    <main>
+        
+        <!-- 2. HERO SECTION -->
+        <section class="vv-hero" id="hero">
+            <div class="vv-hero-video-wrapper">
+                <div class="vv-hero-video-overlay" style="background: radial-gradient(circle at center, rgba(138, 43, 226, 0.08) 10%, var(--bg-dark) 90%);"></div>
+            </div>
+            
+            <div class="vv-container vv-hero-content">
+                <span class="vv-badge-eyebrow">India's Leading Author Platform</span>
+                <h1 class="vv-hero-title">
+                    India's Leading <span class="vv-gradient-text">Book Marketing</span>, Author Branding & <span class="vv-gradient-text">Literary PR</span> Platform
+                </h1>
+                <p class="vv-hero-subtitle">
+                    We help authors increase visibility through strategic book marketing, literary publicity campaigns, media outreach, digital branding, and long-term audience-building techniques designed for the modern publishing industry.
+                </p>
+                <div class="vv-hero-actions">
+                    <a href="#services" class="vv-btn vv-btn-primary">Explore Our Services</a>
+                    <a href="#success-stories" class="vv-btn vv-btn-outline">View Success Stories</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTNERS HORIZONTAL MARQUEE -->
+        <section class="vv-marquee-section">
+            <div class="vv-marquee-container">
+                <div class="vv-marquee-wrapper">
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">HC</div>
+                        <span class="vv-marquee-info">HarperCollins <span class="vv-marquee-audience">India</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">RP</div>
+                        <span class="vv-marquee-info">Rupa <span class="vv-marquee-audience">Publications</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">JP</div>
+                        <span class="vv-marquee-info">Jaico <span class="vv-marquee-audience">Publishing</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">GP</div>
+                        <span class="vv-marquee-info">Garuda <span class="vv-marquee-audience">Prakashan</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">WF</div>
+                        <span class="vv-marquee-info">White Falcon <span class="vv-marquee-audience">Publishing</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <!-- Repeated for seamless loop -->
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">HC</div>
+                        <span class="vv-marquee-info">HarperCollins <span class="vv-marquee-audience">India</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">RP</div>
+                        <span class="vv-marquee-info">Rupa <span class="vv-marquee-audience">Publications</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">JP</div>
+                        <span class="vv-marquee-info">Jaico <span class="vv-marquee-audience">Publishing</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">GP</div>
+                        <span class="vv-marquee-info">Garuda <span class="vv-marquee-audience">Prakashan</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                    <div class="vv-marquee-card">
+                        <div class="vv-marquee-avatar">WF</div>
+                        <span class="vv-marquee-info">White Falcon <span class="vv-marquee-audience">Publishing</span></span>
+                        <span class="vv-marquee-label">Publisher</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. STATS SECTION -->
+        <section class="vv-stats-section" id="stats">
+            <div class="vv-container">
+                <div class="vv-stats-grid">
+                    
+                    <div class="vv-stat-card vv-glass-card vv-reveal">
+                        <div class="vv-stat-number vv-counter vv-gradient-text" data-target="5000" data-prefix="" data-suffix="+">5,000+</div>
+                        <span class="vv-stat-label">Authors Served</span>
+                        <p class="vv-stat-desc">Authors Served Since 2016 and Still Growing</p>
+                    </div>
+
+                    <div class="vv-stat-card vv-glass-card vv-reveal">
+                        <div class="vv-stat-number vv-counter vv-gradient-text" data-target="9" data-prefix="" data-suffix="+">9+</div>
+                        <span class="vv-stat-label">Years Experience</span>
+                        <p class="vv-stat-desc">Years of Experience in Literary Marketing</p>
+                    </div>
+
+                    <div class="vv-stat-card vv-glass-card vv-reveal">
+                        <div class="vv-stat-number vv-counter vv-gradient-text" data-target="98" data-prefix="" data-suffix="%">98%</div>
+                        <span class="vv-stat-label">Success Rate</span>
+                        <p class="vv-stat-desc">Client Success Rate across Genres</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ABOUT SECTION -->
+        <section class="vv-trust-section" id="about">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">About Criticspace</span>
+                    <h2 class="vv-section-title">Book Marketing, Author Branding & Media Visibility</h2>
+                </div>
+
+                <div style="max-width: 800px; margin: 0 auto 4rem auto; line-height: 1.8; color: var(--text-muted); font-size: 1.1rem; display: flex; flex-direction: column; gap: 1.5rem;">
+                    <p>
+                        Founded in 2016, Criticspace has grown into one of India's leading literary marketing and author branding platforms. Over the years, we have worked with 5000+ authors and books across multiple genres, supporting both traditionally published and self-published writers through strategic promotion, branding, publicity, and reader engagement campaigns.
+                    </p>
+                    <p>
+                        Criticspace has collaborated with books and authors associated with renowned publishing houses including HarperCollins India, Rupa Publications, Jaico Publishing House, Garuda Prakashan, White Falcon Publishing, and many more.
+                    </p>
+                    <p style="font-weight: 600; color: #fff; text-align: center; border-left: 3px solid var(--primary); padding-left: 1rem; margin-top: 1rem;">
+                        Our goal is simple: To help books reach the right readers and help authors build long-term literary recognition.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SERVICES SECTION -->
+        <section class="vv-benefits-section" id="services">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Expert Solutions</span>
+                    <h2 class="vv-section-title">Our Author Growth & Book Promotion Services</h2>
+                    <p class="vv-section-desc">Tailored strategies to elevate your book launch, build editorial authority, and expand reader networks.</p>
+                </div>
+
+                <!-- Bento Grid Layout for 6 Services -->
+                <div class="vv-bento-grid">
+                    
+                    <div class="vv-bento-card vv-glass-card bento-medium vv-reveal">
+                        <span style="font-size: 2rem; margin-bottom: 1rem; display: block;">📚</span>
+                        <h3>Book Marketing</h3>
+                        <p>Strategic promotion solutions designed to improve book visibility, reader discovery, and audience engagement across multiple platforms.</p>
+                    </div>
+
+                    <div class="vv-bento-card vv-glass-card bento-small vv-reveal">
+                        <span style="font-size: 2rem; margin-bottom: 1rem; display: block;">✍️</span>
+                        <h3>Author Branding</h3>
+                        <p>Build a professional author identity through branding, portfolio development, interviews, and public visibility opportunities.</p>
+                    </div>
+
+                    <div class="vv-bento-card vv-glass-card bento-small vv-reveal">
+                        <span style="font-size: 2rem; margin-bottom: 1rem; display: block;">📰</span>
+                        <h3>PR & Media Coverage</h3>
+                        <p>Expand your reach through news features, press releases, media exposure, literary publications, and digital publicity campaigns.</p>
+                    </div>
+
+                    <div class="vv-bento-card vv-glass-card bento-medium vv-reveal">
+                        <span style="font-size: 2rem; margin-bottom: 1rem; display: block;">📱</span>
+                        <h3>Digital Marketing</h3>
+                        <p>Connect with readers through social media marketing, Google campaigns, email marketing, and influencer collaborations.</p>
+                    </div>
+
+                    <div class="vv-bento-card vv-glass-card bento-small vv-reveal">
+                        <span style="font-size: 2rem; margin-bottom: 1rem; display: block;">💻</span>
+                        <h3>Website Designing</h3>
+                        <p>Create a professional online presence with author websites, landing pages, SEO support, Wikipedia assistance, and Google Knowledge Panel guidance.</p>
+                    </div>
+
+                    <div class="vv-bento-card vv-glass-card bento-medium vv-reveal">
+                        <span style="font-size: 2rem; margin-bottom: 1rem; display: block;">📖</span>
+                        <h3>Literary Magazine Features</h3>
+                        <p>Gain recognition through author spotlights, interviews, book reviews, editorial features, and anthology participation in The Literature Today.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TESTIMONIALS SECTION (Vertical Marquee Layout) -->
+        <section class="vv-showcase-section vv-bg-alt" id="success-stories">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Reviews</span>
+                    <h2 class="vv-section-title">~ Client Testimonials ~</h2>
+                    <p class="vv-section-desc">Every author's journey is unique, and every book deserves the opportunity to reach its audience.</p>
+                </div>
+                
+                <!-- 4 Column Testimonial Wall -->
+                <div id="vertical-marquee-testimonials"></div>
+            </div>
+        </section>
+
+        <!-- 7. CTA SECTION -->
+        <section class="vv-pricing-section" style="padding: 6rem 0;">
+            <div class="vv-container">
+                <div class="vv-cta-banner vv-glass-card" style="margin-top: 0; padding: 4.5rem; text-align: center; border-color: rgba(138, 43, 226, 0.2);">
+                    <h3 class="vv-banner-title" style="font-size: 2.5rem; margin-bottom: 1.5rem;">Helping Books Reach the Right Readers</h3>
+                    <p class="vv-banner-desc" style="font-size: 1.25rem; line-height: 1.7; max-width: 750px; margin: 0 auto 3rem auto; color: var(--text-muted);">
+                        Every book has the potential to reach its audience when supported by the right strategy. Through book marketing, author branding, PR & media coverage, digital marketing, and literary features, Criticspace helps authors increase visibility, connect with readers, and build a lasting presence in today's publishing world.
+                    </p>
+                    <a href="#contact-section" class="vv-btn vv-btn-primary" style="padding: 1rem 3rem; font-size: 1.1rem;">Get Started Today</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FAQ SECTION (Standalone Accordion) -->
+        <section class="vv-faq-section" id="faq">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Got Questions?</span>
+                    <h2 class="vv-section-title">Frequently Asked Questions</h2>
+                    <p class="vv-section-desc">Find answers to the most common queries about our campaign workflows, media timelines, and promotion strategies.</p>
+                </div>
+
+                <!-- FAQ Accordion Group -->
+                <div class="vv-accordion-group" id="faq-accordion-container">
+                    
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>1. What services does Criticspace offer?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>We offer strategic book marketing, author branding, PR & media coverage, digital marketing, website designing, and literary magazine features.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>2. How does book marketing help a new author?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>It creates early visibility, builds review momentum, and helps your book reach target readers through optimized algorithms.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>3. What is included in author branding?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>We build professional press kits, organize interviews, manage online profiles (like Wikipedia/Google Panels), and construct a cohesive public identity.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>4. How long does a typical campaign run?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>Our standard campaigns run for 90 days to allow for comprehensive setup, optimization, and media distribution.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>5. Can you guarantee bestseller status?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>While we cannot guarantee arbitrary rankings due to storefront algorithm shifts, our 98% client success rate shows our campaigns consistently drive high reach and sales.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>6. Do you support self-published authors?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>Yes! We work extensively with both traditionally published and self-published authors to ensure professional publicity.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>7. Which media houses do you secure coverage in?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>We secure coverage across major digital platforms, national news websites, literary journals, and active community blogs.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>8. What is The Literature Today magazine feature?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>It is India's premium literary magazine where we place author spotlights, book reviews, and editorial interviews.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>9. How do we get started?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>Simply submit a consultation request on our contact section, and our strategist will reach out to discuss your book's goals.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>10. Do you provide professional book reviews?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>Yes, we organize editorial reviews, magazine spotlights, and influencer reviews to build early social proof.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>11. Do I need a website as an author?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>Yes. An author website acts as your central hub to capture readers, collect emails, and list your books securely.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>12. Can you help set up a Google Knowledge Panel?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>Yes, we guide authors in optimizing search parameters to help search engines index their author profile.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>13. Do you handle international book promotion?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>Yes, we support digital marketing and PR outreach for authors globally, including target campaigns in key markets.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>14. What genres do you work with?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>We work across all major genres, including fiction, non-fiction, self-help, finance, poetry, academic, and business books.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>15. Are your services customizable?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>Yes, we build custom campaign packages based on your specific launch timeline, goals, and budget.</p>
+                        </div>
+                    </div>
+
+                    <div class="vv-accordion-item vv-reveal">
+                        <button class="vv-accordion-trigger" aria-expanded="false">
+                            <span>16. How do we track the results of our campaigns?</span>
+                            <span class="chevron">▼</span>
+                        </button>
+                        <div class="vv-accordion-panel">
+                            <p>We provide comprehensive campaign reports detailing media placements, traffic analytics, reach metrics, and reader engagement.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. BLOG SECTION -->
+        <section class="vv-showcase-section vv-bg-alt" id="blog">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">Resources & Guides</span>
+                    <h2 class="vv-section-title">Book Marketing, Publishing & Literary Insights</h2>
+                    <p class="vv-section-desc">From author branding and book promotion to publishing trends and industry news, our blog brings together practical knowledge, expert perspectives, and valuable resources for authors, publishers, and book enthusiasts.</p>
+                </div>
+
+                <!-- Blog Grid -->
+                <div class="vv-video-grid" style="grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem;">
+                    
+                    <div class="vv-step-card vv-glass-card" style="flex-direction: column; padding: 2rem;">
+                        <span style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 0.5rem;">Marketing</span>
+                        <h4 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.8rem;">Mastering Amazon Ads for Authors</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">Learn how to setup targeted keyword campaigns that lower acquisition costs and drive steady sales.</p>
+                        <a href="/blog" class="vv-press-link" style="font-size: 0.85rem;">Read Article →</a>
+                    </div>
+
+                    <div class="vv-step-card vv-glass-card" style="flex-direction: column; padding: 2rem;">
+                        <span style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 0.5rem;">PR & Publicity</span>
+                        <h4 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.8rem;">Pitching Your Book to Journalists</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">How to write a compelling press release pitch that gets your launch featured in major online publications.</p>
+                        <a href="/blog" class="vv-press-link" style="font-size: 0.85rem;">Read Article →</a>
+                    </div>
+
+                    <div class="vv-step-card vv-glass-card" style="flex-direction: column; padding: 2rem;">
+                        <span style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 0.5rem;">Branding</span>
+                        <h4 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.8rem;">Building an Engaging Author Website</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">The 5 critical elements your landing page needs to capture readers and build an active newsletter list.</p>
+                        <a href="/blog" class="vv-press-link" style="font-size: 0.85rem;">Read Article →</a>
+                    </div>
+
+                </div>
+
+                <div class="vv-section-footer-cta">
+                    <a href="/blog" class="vv-btn vv-btn-primary">Read Our Blog</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. CONTACT / LEAD CAPTURE FORM -->
+        <section class="vv-contact-section" id="contact-section">
+            <div class="vv-container">
+                <div class="vv-contact-grid" style="grid-template-columns: 1fr; max-width: 650px; margin: 0 auto;">
+                    
+                    <div class="vv-contact-card vv-glass-card">
+                        <h3 class="vv-card-title">Book a Growth Session</h3>
+                        <p class="vv-card-sub">Let's discuss how we can engineer a custom book promotion and branding blueprint for your upcoming launch.</p>
+                        <form class="vv-form" id="lead-form">
+                            <div class="vv-form-group">
+                                <label for="form-name">Name *</label>
+                                <input type="text" id="form-name" required placeholder="e.g. R K Mohapatra">
+                            </div>
+                            <div class="vv-form-group">
+                                <label for="form-email">Email *</label>
+                                <input type="email" id="form-email" required placeholder="e.g. author@criticspace.com">
+                            </div>
+                            <div class="vv-form-group">
+                                <label for="form-niche">Select Main Campaign Goal *</label>
+                                <select id="form-niche" required>
+                                    <option value="" disabled selected>Select campaign goal</option>
+                                    <option value="marketing">Book Promotion & Sales</option>
+                                    <option value="branding">Author Personal Branding</option>
+                                    <option value="pr">PR & Media Coverage</option>
+                                    <option value="website">Author Website Design</option>
+                                    <option value="magazine">Magazine Feature & Reviews</option>
+                                </select>
+                            </div>
+                            <div class="vv-form-group">
+                                <label for="form-msg">Book Summary & Launch Goals</label>
+                                <textarea id="form-msg" rows="4" placeholder="Tell us about your book genre, publication status, and what marketing goals you want to achieve..."></textarea>
+                            </div>
+                            <button type="submit" class="vv-btn vv-btn-primary vv-btn-block">Submit Consultation Request</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 12. FOOTER -->
+    <footer class="vv-footer">
+        <div class="vv-container">
+            <div class="vv-footer-main" style="grid-template-columns: 400px 1fr;">
+                <div class="vv-footer-brand">
+                    <a href="#hero" class="vv-logo" style="line-height: 1.1;">
+                        <span class="vv-logo-gradient">CRITIC</span>SPACE
+                    </a>
+                    <p class="vv-footer-tagline">
+                        India's Leading Book Marketing, Author Branding & Literary PR Platform. Founded 2016.
+                    </p>
+                    <div class="vv-social-icons">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LN</a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+                    </div>
+                </div>
+
+                <!-- Links Grid -->
+                <div class="vv-footer-links-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="vv-footer-col">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#services">Book Marketing</a></li>
+                            <li><a href="#services">Author Branding</a></li>
+                            <li><a href="#services">PR & Media</a></li>
+                            <li><a href="#services">Digital Marketing</a></li>
+                            <li><a href="#services">Website Designing</a></li>
+                            <li><a href="#services">Literary Magazine</a></li>
+                        </ul>
+                    </div>
+                    <div class="vv-footer-col">
+                        <h4>Company & Contact</h4>
+                        <ul>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#success-stories">Success Stories</a></li>
+                            <li><a href="#blog">Blog</a></li>
+                            <li><a href="#contact-section">Contact Us</a></li>
+                            <li><a href="#faq">FAQs</a></li>
+                            <li class="vv-contact-item" style="color: var(--text-muted); margin-top: 1rem;">Location: India</li>
+                            <li class="vv-contact-item"><a href="mailto:contact@criticspace.com">contact@criticspace.com</a></li>
+                            <li class="vv-contact-item"><a href="https://criticspace.com" target="_blank" rel="noopener noreferrer">criticspace.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vv-footer-bottom">
+                <p class="vv-copyright">&copy; 2026 Criticspace. All rights reserved.</p>
+                <div class="vv-footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script loading -->
+    <script src="vertical-marquee.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Self-contained Testimonials Model & Marquee Initializer Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const testimonialData = [
+                {
+                    client: "R K Mohapatra",
+                    role: "Financial Expert & Author",
+                    quote: "Criticspace designed an incredible PR campaign that got my finance book featured in major national news outlets. Our sales surged!"
+                },
+                {
+                    client: "Azar",
+                    role: "Author",
+                    quote: "The author branding services helped me build a professional portfolio and gain the recognition I needed to connect with readers."
+                },
+                {
+                    client: "Nihar Bhonsule",
+                    role: "Author",
+                    quote: "From social media marketing to influencer reviews, Criticspace delivered beyond my expectations."
+                },
+                {
+                    client: "Margesh Bhushan Rai",
+                    role: "Author",
+                    quote: "My book reached the bestseller charts thanks to Criticspace's strategic marketing campaigns."
+                },
+                {
+                    client: "Reema Nakra",
+                    role: "Author, Entrepreneur, Founder TSMC Delhi",
+                    quote: "A highly professional team that understands the modern publishing industry. They helped build my personal brand."
+                },
+                {
+                    client: "Saiyid Safdar Abbas Zaidi",
+                    role: "International Author",
+                    quote: "Excellent international outreach. The literary features in The Literature Today gave my work great credibility."
+                },
+                {
+                    client: "Soham Mukherjee",
+                    role: "Author",
+                    quote: "Highly recommended for self-published authors who want to stand out. Their digital marketing is top-tier."
+                },
+                {
+                    client: "Prashant Kaul",
+                    role: "Author",
+                    quote: "Criticspace's media coverage campaigns opened doors to literary festivals and panel discussions."
+                },
+                {
+                    client: "Sambit Daspatnaik",
+                    role: "Best Selling Author",
+                    quote: "The absolute best platform for author branding. They helped me build a loyal community of readers."
+                },
+                {
+                    client: "Madhav Thapar",
+                    role: "Best Selling Author",
+                    quote: "Their website designing and SEO support made a massive difference in my online visibility."
+                },
+                {
+                    client: "Dr. Vipin Gupta",
+                    role: "International Author, California State University",
+                    quote: "Outstanding literary PR. The reviews and media features were key in making my academic books a huge success."
+                }
+            ];
+
+            // Trigger Vertical Marquee Initialization
+            if (typeof window.initVerticalMarquee === 'function') {
+                window.initVerticalMarquee('#vertical-marquee-testimonials', {
+                    data: testimonialData,
+                    columns: 4,
+                    cardType: 'testimonial',
+                    minDuration: 25,
+                    maxDuration: 40
+                });
+            } else {
+                console.warn('initVerticalMarquee function not found. Ensure vertical-marquee.js is loaded.');
+            }
+        });
+    </script>
+</body>
+</html>
