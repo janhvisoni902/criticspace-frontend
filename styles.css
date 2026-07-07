@@ -50,6 +50,15 @@ html {
 body {
     overflow-x: hidden;
     position: relative;
+    /* [ADDED FOR RESPONSIVENESS] Prevent page-level horizontal overflow */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* [ADDED FOR RESPONSIVENESS] Ensure all text wraps properly without clipping on narrow screens */
+h1, h2, h3, h4, h5, h6, p, a, span, button, li, label {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 /* Custom Scrollbar */
@@ -107,6 +116,11 @@ a {
     background: var(--bg-card-hover);
 }
 
+/* [ADDED FOR RESPONSIVENESS] Ensure card elements never blowout parent containers */
+.vv-glass-card, .vv-bento-card, .vv-stat-card, .vv-step-card, .vv-pricing-card, .vv-contact-card {
+    max-width: 100%;
+}
+
 /* Buttons */
 .vv-btn {
     display: inline-flex;
@@ -119,6 +133,10 @@ a {
     cursor: pointer;
     transition: var(--transition);
     border: 2px solid transparent;
+    /* [ADDED FOR RESPONSIVENESS] Prevent button text overflow */
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
 }
 
 .vv-btn-primary {
@@ -944,6 +962,13 @@ a {
     transform: scale(1.2);
 }
 
+.vv-stepper-dot.is-active {
+    background: var(--accent);
+    border-color: #fff;
+    box-shadow: 0 0 10px var(--accent);
+    transform: scale(1.2);
+}
+
 .vv-stepper-cta-btn {
     font-size: 0.85rem;
     font-weight: 700;
@@ -1407,6 +1432,9 @@ a {
     font-family: inherit;
     font-size: 0.95rem;
     transition: var(--transition);
+    /* [ADDED FOR RESPONSIVENESS] Ensure form elements don't blowout layouts */
+    width: 100%;
+    max-width: 100%;
 }
 
 .vv-form-group input:focus,
@@ -1457,7 +1485,7 @@ a {
 }
 
 .vv-calendly-block h4 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: #fff;
     margin-bottom: 1rem;
 }
@@ -1612,6 +1640,8 @@ a {
 .vv-footer-legal {
     display: flex;
     gap: 2rem;
+    /* [ADDED FOR RESPONSIVENESS] Enable wrapping for long legal links list */
+    flex-wrap: wrap;
 }
 
 .vv-footer-legal a {
@@ -1632,6 +1662,23 @@ a {
     text-align: center;
     border-top: 1px dashed var(--border-color);
     padding-top: 1.5rem;
+}
+
+/* [ADDED FOR RESPONSIVENESS] Editorial two-column grid support for inner service pages */
+.vv-editorial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin: 4rem 0;
+}
+
+/* [ADDED FOR RESPONSIVENESS] Related service and media partner grids definitions */
+.vv-related-grid, .vv-media-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
 }
 
 /* ----------------------------------------------------
@@ -1664,6 +1711,15 @@ a {
     .vv-pricing-card:last-child {
         grid-column: span 2;
     }
+    /* [ADDED FOR RESPONSIVENESS] Adjust footer main columns gap on mid-screens */
+    .vv-footer-main {
+        gap: 3rem;
+        grid-template-columns: 300px 1fr;
+    }
+    /* [ADDED FOR RESPONSIVENESS] Resize service inner grids on tablets */
+    .vv-related-grid, .vv-media-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 900px) {
@@ -1680,6 +1736,10 @@ a {
 }
 
 @media (max-width: 768px) {
+    /* [ADDED FOR RESPONSIVENESS] Scale containers inner horizontal margins on mobile viewports */
+    .vv-container {
+        padding: 0 1.5rem;
+    }
     .vv-hero-title {
         font-size: 2.6rem;
     }
@@ -1704,6 +1764,10 @@ a {
         flex-direction: column;
         align-items: stretch;
         gap: 1.2rem;
+        /* [ADDED FOR RESPONSIVENESS] Disable sticky positioning on mobile device viewports */
+        position: relative;
+        top: 0;
+        margin-bottom: 2rem;
     }
     .vv-stepper-indicator {
         max-width: 100%;
@@ -1730,15 +1794,20 @@ a {
         grid-column: span 1;
     }
     .vv-bento-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         grid-auto-rows: auto;
     }
     .bento-small, .bento-medium, .bento-large {
-        grid-column: span 1;
-        grid-row: span 1;
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
     }
     .vv-bento-card {
         min-height: 180px;
+    }
+    /* [ADDED FOR RESPONSIVENESS] Force clean bento grid columns fallback on mobile screen sizes */
+    .vv-bento-grid > * {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
     }
     .vv-faq-footer-box {
         flex-direction: column;
@@ -1761,9 +1830,24 @@ a {
         grid-template-columns: 1fr;
         gap: 2.5rem;
     }
+    /* [ADDED FOR RESPONSIVENESS] Stack related and media lists single-column on mobile screen widths */
+    .vv-related-grid, .vv-media-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    /* [ADDED FOR RESPONSIVENESS] Stack editorial grids for reading comfort */
+    .vv-editorial-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin: 2.5rem 0;
+    }
 }
 
 @media (max-width: 480px) {
+    /* [ADDED FOR RESPONSIVENESS] Narrow padding for small phone viewports */
+    .vv-container {
+        padding: 0 1rem;
+    }
     .vv-hero-title {
         font-size: 2rem;
     }
@@ -1771,6 +1855,9 @@ a {
         flex-direction: column;
         width: 100%;
         gap: 1rem;
+        /* [ADDED FOR RESPONSIVENESS] Center alignments and wrapping */
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .vv-hero-actions .vv-btn {
         width: 100%;
@@ -1791,5 +1878,19 @@ a {
     }
     .vv-trust-actions .vv-btn {
         width: 100%;
+    }
+    /* [ADDED FOR RESPONSIVENESS] Stack FAQ footer buttons vertically on narrow viewports */
+    .vv-faq-footer-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.8rem;
+    }
+    .vv-faq-footer-actions .vv-btn {
+        width: 100%;
+    }
+    /* [ADDED FOR RESPONSIVENESS] Narrow gap for footer legal section on small viewports */
+    .vv-footer-legal {
+        gap: 1rem 1.5rem;
+        justify-content: center;
     }
 }
