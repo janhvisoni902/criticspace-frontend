@@ -1485,7 +1485,7 @@ a {
 }
 
 .vv-calendly-block h4 {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: #fff;
     margin-bottom: 1rem;
 }
@@ -1711,10 +1711,10 @@ a {
     .vv-pricing-card:last-child {
         grid-column: span 2;
     }
-    /* [ADDED FOR RESPONSIVENESS] Adjust footer main columns gap on mid-screens */
+    /* [ADDED FOR RESPONSIVENESS] Adjust footer main columns gap on mid-screens and override inline column layout */
     .vv-footer-main {
         gap: 3rem;
-        grid-template-columns: 300px 1fr;
+        grid-template-columns: 300px 1fr !important;
     }
     /* [ADDED FOR RESPONSIVENESS] Resize service inner grids on tablets */
     .vv-related-grid, .vv-media-grid {
@@ -1822,14 +1822,19 @@ a {
     .vv-contact-card {
         padding: 2rem;
     }
+    
+    /* [ADDED FOR RESPONSIVENESS] Stack footer main branding and link grids vertically, override inline properties */
     .vv-footer-main {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 3rem;
     }
+    
+    /* [ADDED FOR RESPONSIVENESS] Stack all footer columns vertically, overriding inline properties */
     .vv-footer-links-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 2.5rem;
     }
+    
     /* [ADDED FOR RESPONSIVENESS] Stack related and media lists single-column on mobile screen widths */
     .vv-related-grid, .vv-media-grid {
         grid-template-columns: 1fr;
