@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="vv-video-card vv-reveal">
                         <span class="vv-video-badge-status">${vid.category}</span>
                         <video class="vv-video-element vv-autoplay-video" 
-                               data-src="${vid.videoUrl}" 
-                               poster="${vid.posterUrl}" 
-                               loop muted playsinline preload="none">
+                                data-src="${vid.videoUrl}" 
+                                poster="${vid.posterUrl}" 
+                                loop muted playsinline preload="none">
                         </video>
                         <div class="vv-video-card-overlay">
                             <h4 class="vv-video-title">${vid.title}</h4>
@@ -537,6 +537,644 @@ document.addEventListener('DOMContentLoaded', () => {
             leadForm.reset();
         });
     }
+
+    // ----------------------------------------------------
+    // ----------------------------------------------------
+    // NEW: Expert Solutions premium interaction START
+    // ----------------------------------------------------
+    const servicesSection = document.getElementById('services');
+    const bentoGrid = document.querySelector('.vv-bento-grid');
+    const bentoCards = document.querySelectorAll('.vv-bento-card');
+    
+    // Check if motion preferences allow animations and if device has pointing precision (mouse)
+    const isMotionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+    if (isMotionAllowed) {
+        // Activate float animation classes by default
+        bentoCards.forEach((card, index) => {
+            card.classList.add(`is-floating-${index + 1}`);
+        });
+
+        if (isFinePointer && servicesSection && bentoGrid && bentoCards.length > 0) {
+            let activeCard = null;
+            let mouseSectionX = 0; // Mouse coordinate normalized relative to section center (-1 to 1)
+            let mouseSectionY = 0;
+            
+            let cardTiltX = 0; // Normalized cursor coordinate inside active card (-1 to 1)
+            let cardTiltY = 0;
+            
+            let currentTiltX = 0;
+            let currentTiltY = 0;
+            let currentParallaxX = 0;
+            let currentParallaxY = 0;
+            
+            let animationFrameId = null;
+
+            // Definition of base offsets and parallax coefficients for each card on desktop
+            const cardData = [
+                { baseRotation: -1.5, parallaxFactorX: 25,  parallaxFactorY: 15  }, // Card 1
+                { baseRotation: 1,    parallaxFactorX: -20, parallaxFactorY: 25  }, // Card 2
+                { baseRotation: -2,   parallaxFactorX: 30,  parallaxFactorY: -15 }, // Card 3
+                { baseRotation: 1.5,  parallaxFactorX: -15, parallaxFactorY: -20 }, // Card 4
+                { baseRotation: -1,   parallaxFactorX: 20,  parallaxFactorY: 30  }, // Card 5
+                { baseRotation: 2,    parallaxFactorX: -25, parallaxFactorY: -25 }  // Card 6
+            ];
+
+            const updateComposition = () => {
+                // Easing interpolations
+                currentParallaxX += (mouseSectionX - currentParallaxX) * 0.08;
+                currentParallaxY += (mouseSectionY - currentParallaxY) * 0.08;
+                
+                currentTiltX += (cardTiltX - currentTiltX) * 0.15;
+                currentTiltY += (cardTiltY - currentTiltY) * 0.15;
+
+                bentoCards.forEach((card, index) => {
+                    const data = cardData[index];
+                    const px = currentParallaxX * data.parallaxFactorX;
+                    const py = currentParallaxY * data.parallaxFactorY;
+                    
+                    if (card === activeCard) {
+                        // Hovered card: raise up, scale, rotate towards cursor, ignore floating animations
+                        const rX = currentTiltY * -7; // Max 7 deg tilt
+                        const rY = currentTiltX * 7;
+                        
+                        card.style.transform = `translate3d(${px}px, ${py - 12}px, 50px) scale(1.05) rotateX(${rX}deg) rotateY(${rY}deg) rotate(${data.baseRotation}deg)`;
+                    } else {
+                        // Ambient card response: subtle parallax, slide away slightly from hovered card if nearby
+                        let slideX = 0;
+                        let slideY = 0;
+                        
+                        if (activeCard) {
+                            const rect = card.getBoundingClientRect();
+                            const activeRect = activeCard.getBoundingClientRect();
+                            
+                            const dx = (rect.left + rect.width / 2) - (activeRect.left + activeRect.width / 2);
+                            const dy = (rect.top + rect.height / 2) - (activeRect.top + activeRect.height / 2);
+                            const dist = Math.hypot(dx, dy);
+                            
+                            if (dist < 400 && dist > 0) {
+                                // Push ambient cards slightly away from the elevated active card
+                                const push = (1 - dist / 400) * 15;
+                                slideX = (dx / dist) * push;
+                                slideY = (dy / dist) * push;
+                            }
+                        }
+                        
+                        // Combine parallax and push offset with base transforms
+                        card.style.transform = `translate3d(${px + slideX}px, ${py + slideY}px, 0px) rotate(${data.baseRotation}deg)`;
+                    }
+                });
+
+                animationFrameId = requestAnimationFrame(updateComposition);
+            };
+
+            servicesSection.addEventListener('mousemove', (e) => {
+                const rect = servicesSection.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Global normalized coordinates relative to center
+                mouseSectionX = (x / rect.width) * 2 - 1;
+                mouseSectionY = (y / rect.height) * 2 - 1;
+                
+                if (!animationFrameId) {
+                    animationFrameId = requestAnimationFrame(updateComposition);
+                }
+            });
+
+            servicesSection.addEventListener('mouseleave', () => {
+                mouseSectionX = 0;
+                mouseSectionY = 0;
+                activeCard = null;
+                cardTiltX = 0;
+                cardTiltY = 0;
+                
+                bentoCards.forEach(card => {
+                    card.classList.remove('is-hovered');
+                    card.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s';
+                });
+            });
+
+            bentoCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Local normalized coordinates relative to card center
+                    cardTiltX = (x / rect.width) * 2 - 1;
+                    cardTiltY = (y / rect.height) * 2 - 1;
+                    
+                    if (activeCard !== card) {
+                        if (activeCard) {
+                            activeCard.classList.remove('is-hovered');
+                        }
+                        activeCard = card;
+                        card.classList.add('is-hovered');
+                        
+                        // Disable standard floating keyframe class while tracking 3D hover
+                        card.style.transition = 'none';
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (activeCard === card) {
+                        activeCard = null;
+                        cardTiltX = 0;
+                        cardTiltY = 0;
+                        card.classList.remove('is-hovered');
+                        // Restore transition and floating keyframe animation smoothly
+                        card.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s, border-color 0.6s';
+                    }
+                });
+            });
+        }
+    }
+
+    // Staggered fade entrance animation using custom trigger
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+    
+    const bentoStaggerObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const cards = target.querySelectorAll('.vv-bento-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('is-visible');
+                    }, index * 100); // 100ms staggered delay
+                });
+                bentoStaggerObserver.unobserve(target);
+            }
+        });
+    }, observerOptions);
+
+    if (servicesSection) {
+        bentoStaggerObserver.observe(servicesSection);
+    }
+    // NEW: Expert Solutions premium interaction END
+
+    // NEW: Expert Solutions premium interaction END
+
+    // NEW: Testimonials 3D Carousel START
+    window.initTestimonials3DCarousel = function (data) {
+        const viewport = document.getElementById('vv-carousel-viewport');
+        const track = document.getElementById('vv-carousel-track');
+        const pagination = document.getElementById('vv-carousel-pagination');
+        const prevBtn = document.getElementById('vv-carousel-btn-prev');
+        const nextBtn = document.getElementById('vv-carousel-btn-next');
+        
+        if (!viewport || !track || !pagination || !data || data.length === 0) return;
+
+        // Life cycle cleanup of previous event handlers and timers to prevent memory leaks
+        if (window.cleanupTestimonials3DCarousel) {
+            window.cleanupTestimonials3DCarousel();
+        }
+
+        let currentIndex = 0;
+        let autoplayTimer = null;
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        let dragProgress = 0;
+        
+        const total = data.length;
+        const cardElements = [];
+
+        // Build dynamically
+        track.innerHTML = '';
+        pagination.innerHTML = '';
+
+        data.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'vv-testimonial-card';
+            card.setAttribute('role', 'group');
+            card.setAttribute('aria-roledescription', 'slide');
+            card.setAttribute('aria-label', `Testimonial ${index + 1} of ${total}`);
+            
+            // Format semantic titles
+            let quoteHtml = item.quote.replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/_(.*?)_/g, '<em>$1</em>');
+            const designationHtml = item.role ? `<span class="vv-testimonial-author-role">${item.role}</span>` : '';
+
+            card.innerHTML = `
+                <div class="vv-testimonial-quote-icon">“</div>
+                <div class="vv-testimonial-text-container">
+                    <p class="vv-testimonial-text">${quoteHtml}</p>
+                    <button class="vv-carousel-read-more" aria-label="Read more testimonial text">Read More</button>
+                </div>
+                <div class="vv-testimonial-author">
+                    <span class="vv-testimonial-author-name">${item.client}</span>
+                    ${designationHtml}
+                </div>
+            `;
+            
+            track.appendChild(card);
+            cardElements.push(card);
+
+            // Pagination dot
+            const dot = document.createElement('button');
+            dot.className = 'vv-carousel-dot';
+            dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+            if (index === 0) dot.classList.add('is-active');
+            pagination.appendChild(dot);
+        });
+
+        // Trigger dynamic check for overflow clamp button
+        setTimeout(() => {
+            cardElements.forEach(card => {
+                const textEl = card.querySelector('.vv-testimonial-text');
+                const readMoreBtn = card.querySelector('.vv-carousel-read-more');
+                if (textEl && readMoreBtn) {
+                    if (textEl.scrollHeight > textEl.clientHeight) {
+                        readMoreBtn.style.display = 'inline-block';
+                    }
+                }
+            });
+        }, 150);
+
+        // Accessibility Modal manager
+        let modalOverlay = document.getElementById('vv-carousel-modal-overlay');
+        if (!modalOverlay) {
+            modalOverlay = document.createElement('div');
+            modalOverlay.id = 'vv-carousel-modal-overlay';
+            modalOverlay.className = 'vv-carousel-modal-overlay';
+            modalOverlay.setAttribute('aria-hidden', 'true');
+            modalOverlay.innerHTML = `
+                <div class="vv-carousel-modal" role="dialog" aria-modal="true" aria-labelledby="vv-carousel-modal-title">
+                    <button class="vv-carousel-modal-close" aria-label="Close modal">&times;</button>
+                    <div class="vv-carousel-modal-content">
+                        <p class="vv-carousel-modal-quote" id="vv-carousel-modal-quote"></p>
+                        <div class="vv-testimonial-author">
+                            <span class="vv-testimonial-author-name" id="vv-carousel-modal-name"></span>
+                            <span class="vv-testimonial-author-role" id="vv-carousel-modal-role"></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modalOverlay);
+        }
+
+        const modalCloseBtn = modalOverlay.querySelector('.vv-carousel-modal-close');
+        let triggerElement = null;
+
+        const trapModalFocus = (e) => {
+            if (e.key === 'Tab') {
+                const focusables = modalOverlay.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+                if (focusables.length === 0) return;
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+
+                if (e.shiftKey) { // Shift + Tab
+                    if (document.activeElement === first) {
+                        last.focus();
+                        e.preventDefault();
+                    }
+                } else { // Tab
+                    if (document.activeElement === last) {
+                        first.focus();
+                        e.preventDefault();
+                    }
+                }
+            } else if (e.key === 'Escape') {
+                closeModal();
+            }
+        };
+
+        const openModal = (item, triggerEl) => {
+            triggerElement = triggerEl;
+            
+            const quoteEl = modalOverlay.querySelector('#vv-carousel-modal-quote');
+            const nameEl = modalOverlay.querySelector('#vv-carousel-modal-name');
+            const roleEl = modalOverlay.querySelector('#vv-carousel-modal-role');
+
+            quoteEl.innerHTML = item.quote.replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/_(.*?)_/g, '<em>$1</em>');
+            nameEl.textContent = item.client;
+            roleEl.textContent = item.role || '';
+
+            modalOverlay.classList.add('is-active');
+            modalOverlay.setAttribute('aria-hidden', 'false');
+            document.addEventListener('keydown', trapModalFocus);
+            document.body.style.overflow = 'hidden';
+
+            pauseAutoplay();
+
+            setTimeout(() => {
+                modalCloseBtn.focus();
+            }, 50);
+        };
+
+        const closeModal = () => {
+            modalOverlay.classList.remove('is-active');
+            modalOverlay.setAttribute('aria-hidden', 'true');
+            document.removeEventListener('keydown', trapModalFocus);
+            document.body.style.overflow = '';
+            
+            if (triggerElement) {
+                triggerElement.focus();
+            }
+            resumeAutoplay();
+        };
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        // Event delegation for cards clicks/Read Mores
+        const handleTrackClick = (e) => {
+            const readMoreBtn = e.target.closest('.vv-carousel-read-more');
+            if (readMoreBtn) {
+                const card = readMoreBtn.closest('.vv-testimonial-card');
+                const cardIdx = cardElements.indexOf(card);
+                if (cardIdx !== -1) {
+                    openModal(data[cardIdx], readMoreBtn);
+                }
+            }
+        };
+        track.addEventListener('click', handleTrackClick);
+
+        // Core 3D transformations engine
+        const isMotionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        const updateTransforms = (progressOffset = 0) => {
+            const centerIdx = currentIndex - progressOffset;
+            
+            cardElements.forEach((card, index) => {
+                let diff = index - centerIdx;
+
+                // Handle circular mathematical boundary wrap-arounds cleanly
+                if (diff < -total / 2) {
+                    diff += total;
+                } else if (diff > total / 2) {
+                    diff -= total;
+                }
+
+                const absDiff = Math.abs(diff);
+                let transform = '';
+                let opacity = 0;
+                let zIndex = 0;
+                let isPointerEventEnabled = 'none';
+
+                // Responsive sizing bounds
+                let spacing = 180;
+                if (window.innerWidth <= 768) {
+                    spacing = 0; // Mobile shows center card only
+                } else if (window.innerWidth <= 1024) {
+                    spacing = 110; // Tablet peeks side elements slightly closer
+                }
+
+                if (absDiff < 1.5 && (window.innerWidth > 768 || absDiff < 0.5)) {
+                    /* UPDATED: increased side-card visibility */
+                    const scale = isMotionAllowed ? (1 - absDiff * 0.1) : 1;
+                    const translateX = diff * spacing;
+                    const translateZ = isMotionAllowed ? (absDiff * -100) : 0;
+                    const rotateY = isMotionAllowed ? (diff * -20) : 0;
+
+                    transform = `translate3d(${translateX}px, 0px, ${translateZ}px) scale(${scale}) rotateY(${rotateY}deg)`;
+                    opacity = 1 - absDiff * 0.35; // 65% opacity on side cards (absDiff === 1)
+                    zIndex = Math.round(10 - absDiff * 5);
+                    
+                    if (absDiff < 0.5) {
+                        isPointerEventEnabled = 'auto';
+                    }
+                } else {
+                    // Out-of-bounds items hidden out of viewport safely
+                    transform = `translate3d(${diff > 0 ? 500 : -500}px, 0px, -500px) scale(0.5) rotateY(${diff > 0 ? -45 : 45}deg)`;
+                    opacity = 0;
+                    zIndex = 0;
+                }
+
+                card.style.transform = transform;
+                card.style.opacity = opacity;
+                card.style.zIndex = zIndex;
+                card.style.pointerEvents = isPointerEventEnabled;
+
+                // Stacking glows and active attributes
+                if (absDiff < 0.5) {
+                    card.classList.add('is-active');
+                    card.setAttribute('aria-hidden', 'false');
+                    card.removeAttribute('tabindex');
+                } else {
+                    card.classList.remove('is-active');
+                    card.setAttribute('aria-hidden', 'true');
+                    card.setAttribute('tabindex', '-1');
+                }
+            });
+
+            // Update pagination indicators
+            const dots = pagination.querySelectorAll('.vv-carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('is-active', index === currentIndex);
+            });
+        };
+
+        const navigate = (direction) => {
+            currentIndex = (currentIndex + direction + total) % total;
+            updateTransforms(0);
+        };
+
+        // Navigation controls clicks
+        const handlePrevClick = () => { navigate(-1); restartAutoplay(); };
+        const handleNextClick = () => { navigate(1); restartAutoplay(); };
+
+        prevBtn.addEventListener('click', handlePrevClick);
+        nextBtn.addEventListener('click', handleNextClick);
+
+        // Dot index clicks
+        const handleDotClick = (e) => {
+            const dot = e.target.closest('.vv-carousel-dot');
+            if (dot) {
+                const dots = Array.from(pagination.querySelectorAll('.vv-carousel-dot'));
+                const index = dots.indexOf(dot);
+                if (index !== -1) {
+                    currentIndex = index;
+                    updateTransforms(0);
+                    restartAutoplay();
+                }
+            }
+        };
+        pagination.addEventListener('click', handleDotClick);
+
+        // Pointer Drag & Swipe physics mapping
+        const handlePointerDown = (e) => {
+            if (e.target.closest('.vv-carousel-modal') || e.target.closest('.vv-carousel-btn') || e.target.closest('.vv-carousel-dot') || e.target.closest('.vv-carousel-read-more')) return;
+            isDragging = true;
+            startX = e.clientX || (e.touches && e.touches[0].clientX);
+            currentX = startX;
+            dragProgress = 0;
+            
+            // Suspend transition timing on active drags
+            cardElements.forEach(card => {
+                card.style.transition = 'none';
+            });
+            pauseAutoplay();
+        };
+
+        const handlePointerMove = (e) => {
+            if (!isDragging) return;
+            currentX = e.clientX || (e.touches && e.touches[0].clientX);
+            const deltaX = currentX - startX;
+            const width = viewport.clientWidth || 500;
+            dragProgress = deltaX / width;
+
+            // GPU-accelerated requestAnimationFrame update loops
+            requestAnimationFrame(() => {
+                updateTransforms(dragProgress);
+            });
+        };
+
+        const handlePointerUp = () => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            // Restore smooth transitions
+            cardElements.forEach(card => {
+                card.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s, border-color 0.8s, box-shadow 0.8s';
+            });
+
+            const width = viewport.clientWidth || 500;
+            const threshold = 60 / width;
+
+            if (dragProgress > threshold) {
+                navigate(-1);
+            } else if (dragProgress < -threshold) {
+                navigate(1);
+            } else {
+                updateTransforms(0);
+            }
+            resumeAutoplay();
+        };
+
+        viewport.addEventListener('mousedown', handlePointerDown);
+        viewport.addEventListener('mousemove', handlePointerMove);
+        window.addEventListener('mouseup', handlePointerUp);
+
+        viewport.addEventListener('touchstart', handlePointerDown, { passive: true });
+        viewport.addEventListener('touchmove', handlePointerMove, { passive: true });
+        viewport.addEventListener('touchend', handlePointerUp);
+
+        // Throttled mouse wheel scroll hook
+        let wheelTimer = null;
+        const handleWheel = (e) => {
+            if (Math.abs(e.deltaX) < 15) return;
+            e.preventDefault();
+            if (wheelTimer) return;
+
+            if (e.deltaX > 0) {
+                navigate(1);
+            } else {
+                navigate(-1);
+            }
+            restartAutoplay();
+
+            wheelTimer = setTimeout(() => {
+                wheelTimer = null;
+            }, 600); // 600ms debounce
+        };
+        viewport.addEventListener('wheel', handleWheel, { passive: false });
+
+        // Autoplay controller
+        const resumeAutoplay = () => {
+            if (!isMotionAllowed) return; // Disable autoplay if prefers-reduced-motion
+            if (autoplayTimer) clearInterval(autoplayTimer);
+            autoplayTimer = setInterval(() => {
+                navigate(1);
+            }, 6000);
+        };
+
+        const pointerEventsCleanup = () => {
+            pauseAutoplay();
+        };
+
+        const pauseAutoplay = () => {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+                autoplayTimer = null;
+            }
+        };
+
+        const restartAutoplay = () => {
+            pauseAutoplay();
+            resumeAutoplay();
+        };
+
+        // Pause autoplay on mouse hovers and keyboard focus states
+        viewport.addEventListener('mouseenter', pauseAutoplay);
+        viewport.addEventListener('mouseleave', resumeAutoplay);
+        
+        // Pause on focus within outer wrapper elements
+        const outerWrapper = document.querySelector('.vv-carousel-outer-wrapper');
+        const handleFocusIn = () => {
+            pauseAutoplay();
+        };
+        const handleFocusOut = () => {
+            resumeAutoplay();
+        };
+        if (outerWrapper) {
+            outerWrapper.addEventListener('focusin', handleFocusIn);
+            outerWrapper.addEventListener('focusout', handleFocusOut);
+        }
+
+        // Keyboard arrow triggers
+        const handleKeyDownNav = (e) => {
+            if (e.key === 'ArrowLeft') {
+                navigate(-1);
+                restartAutoplay();
+            } else if (e.key === 'ArrowRight') {
+                navigate(1);
+                restartAutoplay();
+            }
+        };
+        viewport.setAttribute('tabindex', '0'); // Make carousel wrapper keyboard focusable
+        viewport.addEventListener('keydown', handleKeyDownNav);
+
+        // Resize responsive listener
+        const handleResize = () => {
+            updateTransforms(0);
+        };
+        window.addEventListener('resize', handleResize);
+
+        // Initialize state
+        updateTransforms(0);
+        resumeAutoplay();
+
+        // Lifecycle cleanup registrar to prevent memory leak states
+        window.cleanupTestimonials3DCarousel = () => {
+            pauseAutoplay();
+            
+            prevBtn.removeEventListener('click', handlePrevClick);
+            nextBtn.removeEventListener('click', handleNextClick);
+            pagination.removeEventListener('click', handleDotClick);
+            track.removeEventListener('click', handleTrackClick);
+            
+            viewport.removeEventListener('mousedown', handlePointerDown);
+            viewport.removeEventListener('mousemove', handlePointerMove);
+            window.removeEventListener('mouseup', handlePointerUp);
+
+            viewport.removeEventListener('touchstart', handlePointerDown);
+            viewport.removeEventListener('touchmove', handlePointerMove);
+            viewport.removeEventListener('touchend', handlePointerUp);
+
+            viewport.removeEventListener('wheel', handleWheel);
+            viewport.removeEventListener('mouseenter', pauseAutoplay);
+            viewport.removeEventListener('mouseleave', resumeAutoplay);
+            viewport.removeEventListener('keydown', handleKeyDownNav);
+
+            if (outerWrapper) {
+                outerWrapper.removeEventListener('focusin', handleFocusIn);
+                outerWrapper.removeEventListener('focusout', handleFocusOut);
+            }
+
+            window.removeEventListener('resize', handleResize);
+            modalCloseBtn.removeEventListener('click', closeModal);
+            modalOverlay.removeEventListener('click', closeModal);
+        };
+    };
 
     // Scroll reveal initialization delay fix
     setTimeout(() => {
