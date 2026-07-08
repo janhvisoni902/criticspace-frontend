@@ -19,7 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Navigation links
         const navMenu = document.getElementById('nav-menu');
         const mobileNav = document.getElementById('mobile-nav');
-        if (navMenu && navMenu.children.length === 0 && data.navigation) {
+        const isHomePage =
+    window.location.pathname.endsWith("index.html") ||
+    window.location.pathname === "/" ||
+    window.location.pathname.endsWith("/");
+
+if (isHomePage && navMenu && navMenu.children.length === 0 && data.navigation) {
             data.navigation.forEach(item => {
                 const linkHTML = `<a href="${item.anchor}">${item.label}</a>`;
                 navMenu.insertAdjacentHTML('beforeend', linkHTML);
