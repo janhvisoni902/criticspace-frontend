@@ -13,20 +13,38 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="vertical-marquee.css">
+
+    <!-- Synchronously set preliminary navbar font scale to prevent layout pop -->
+    <script>
+        (function() {
+            var w = window.innerWidth;
+            if (w >= 961 && w < 1350) {
+                var scale = Math.max(0.75, Math.min(1.0, 0.78 + ((w - 961) / (1350 - 961)) * 0.22));
+                document.documentElement.style.setProperty('--nav-font-scale', scale.toFixed(3));
+            }
+        })();
+    </script>
 </head>
 <body>
 
     <!-- 1. NAVBAR -->
     <header class="vv-navbar" id="navbar">
         <div class="vv-nav-container">
+            <!-- NEW: Navbar logo image -->
+            <a href="#hero" class="vv-navbar-logo-link">
+                <div class="vv-navbar-logo-wrapper">
+                    <img src="assets/Criticspace New Logo.jpg" alt="CriticSpace" class="vv-navbar-logo" onerror="this.parentNode.style.display='none';">
+                </div>
+            </a>
+
             <nav class="vv-nav-menu" id="nav-menu">
                 <a href="#hero" class="is-active">Home</a>
-                <a href="book-marketing.html">Book Marketing</a>
-                <a href="author-branding.html">Author Branding</a>
-                <a href="pr-media.html">PR & Media</a>
-                <a href="digital-marketing.html">Digital Marketing</a>
-                <a href="website-designing.html">Website Designing</a>
-                <a href="literary-magazine.html">Literary Magazine</a>
+                <a href="BookMarketing.html">Book Marketing</a>
+                <a href="AuthorBrandling.html">Author Branding</a>
+                <a href="PR&Media.html">PR & Media</a>
+                <a href="Digital Marketing.html">Digital Marketing</a>
+                <a href="Autho design.html">Website Designing</a>
+                <a href="Literary.html">Literary Magazine</a>
                 <a href="#about">About</a>
                 <a href="#faq">FAQs</a>
                 <a href="#blog">Blog</a>
@@ -47,12 +65,12 @@
     <div class="vv-mobile-drawer" id="mobile-drawer">
         <nav class="vv-mobile-nav" id="mobile-nav">
             <a href="#hero" class="is-active">Home</a>
-            <a href="book-marketing.html">Book Marketing</a>
-            <a href="author-branding.html">Author Branding</a>
-            <a href="pr-media.html">PR & Media</a>
-            <a href="digital-marketing.html">Digital Marketing</a>
-            <a href="website-designing.html">Website Designing</a>
-            <a href="literary-magazine.html">Literary Magazine</a>
+            <a href="BookMarketing.html">Book Marketing</a>
+            <a href="AuthorBrandling.html">Author Branding</a>
+            <a href="PR&Media.html">PR & Media</a>
+            <a href="Digital Marketing.html">Digital Marketing</a>
+            <a href="Autho design.html">Website Designing</a>
+            <a href="Literary.html">Literary Magazine</a>
             <a href="#about">About</a>
             <a href="#faq">FAQs</a>
             <a href="#blog">Blog</a>
@@ -218,7 +236,7 @@
                             <li><span class="bullet">•</span> Reader Engagement Campaigns</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="book-marketing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="BookMarketing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -237,7 +255,7 @@
                             <li><span class="bullet">•</span> Public Speaking Branding</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="author-branding.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="AuthorBrandling.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -256,7 +274,7 @@
                             <li><span class="bullet">•</span> Literary Features</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="pr-media.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="PR&Media.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -275,7 +293,7 @@
                             <li><span class="bullet">•</span> Influencer Marketing</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="digital-marketing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="Digital Marketing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -294,7 +312,7 @@
                             <li><span class="bullet">•</span> Landing Page Development</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="website-designing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="Autho design.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -314,12 +332,39 @@
                             <li><span class="bullet">•</span> Anthologies</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="literary-magazine.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="Literary.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- NEW: Book Cover Carousel Section START -->
+        <section class="vv-book-marquee-section" aria-label="Book covers promoted by CriticSpace">
+            <div class="vv-container">
+                <div class="vv-section-header">
+                    <span class="vv-eyebrow">FEATURED TITLES</span>
+                    <h2 class="vv-section-title">Books We've Helped Promote</h2>
+                </div>
+            </div>
+            <div class="vv-book-marquee-container" style="overflow: hidden; width: 100%; display: flex; mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);">
+                <div class="vv-book-marquee-wrapper" style="display: flex; gap: 2.5rem; width: max-content; animation: vv-book-marquee-left 35s linear infinite;">
+                    <div class="vv-book-cover-card">
+                        <img src="assets/Dr. Roopleen.jpg" alt="PLACEHOLDER — replace with real book cover title" class="vv-book-cover-image" loading="lazy">
+                    </div>
+                    <div class="vv-book-cover-card">
+                        <img src="assets/Queen Tara.jpg" alt="PLACEHOLDER — replace with real book cover title" class="vv-book-cover-image" loading="lazy">
+                    </div>
+                    <div class="vv-book-cover-card">
+                        <img src="assets/Rajeev Kurapati.jpg" alt="PLACEHOLDER — replace with real book cover title" class="vv-book-cover-image" loading="lazy">
+                    </div>
+                    <div class="vv-book-cover-card">
+                        <img src="assets/Stuti Changle.jpg" alt="PLACEHOLDER — replace with real book cover title" class="vv-book-cover-image" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- NEW: Book Cover Carousel Section END -->
 
         <!-- 5. SERVICES SECTION -->
         <section class="vv-benefits-section" id="services">
@@ -713,12 +758,12 @@
                     <div class="vv-footer-col">
                         <h4>Services</h4>
                         <ul>
-                            <li><a href="book-marketing.html">Book Marketing</a></li>
-                            <li><a href="author-branding.html">Author Branding</a></li>
-                            <li><a href="pr-media.html">PR & Media</a></li>
-                            <li><a href="digital-marketing.html">Digital Marketing</a></li>
-                            <li><a href="website-designing.html">Website Designing</a></li>
-                            <li><a href="literary-magazine.html">Literary Magazine</a></li>
+                            <li><a href="BookMarketing.html">Book Marketing</a></li>
+                            <li><a href="AuthorBrandling.html">Author Branding</a></li>
+                            <li><a href="PR&Media.html">PR & Media</a></li>
+                            <li><a href="Digital Marketing.html">Digital Marketing</a></li>
+                            <li><a href="Autho design.html">Website Designing</a></li>
+                            <li><a href="Literary.html">Literary Magazine</a></li>
                         </ul>
                     </div>
                     <div class="vv-footer-col">
@@ -760,57 +805,77 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const testimonialData = [
+                /* DISABLED: 4 placeholder image-type slides — no real assets were ever supplied.
+                   These have been superseded by the dedicated Book Cover Carousel section (Part 2).
+                   To re-enable in future: uncomment these entries AND re-enable the corresponding
+                   type-branching logic in script.js and .vv-testimonial-card-image CSS in styles.css
+                { type: "image", src: "assets/testimonial-images/image-1.jpg", alt: "PLACEHOLDER — describe image 1" },
+                { type: "image", src: "assets/testimonial-images/image-2.jpg", alt: "PLACEHOLDER — describe image 2" },
+                { type: "image", src: "assets/testimonial-images/image-3.jpg", alt: "PLACEHOLDER — describe image 3" },
+                { type: "image", src: "assets/testimonial-images/image-4.jpg", alt: "PLACEHOLDER — describe image 4" },
+                */
                 {
+                    type: "text",
                     client: "R K Mohapatra",
                     role: "Financial Expert & Author",
                     quote: "Criticspace Literary Journal helps authors promote their books to the Target Audience. Aashi Dewangan's work is remarkable. Her professional attitude, communication, and commitment helped promote my bestselling books successfully. All the work they provided was outstanding."
                 },
                 {
+                    type: "text",
                     client: "Azar",
                     role: "Author",
                     quote: "It was such a smooth collaboration and professional experience. The detailed analysis of my book *Situational Sins* was exceptional. The team fulfilled every promise and the experience was completely worthwhile."
                 },
                 {
+                    type: "text",
                     client: "Nihar Bhonsule",
                     role: "Author",
                     quote: "It has been a great experience. Highly supportive and proactive team. Criticspace provides the best solutions for authors to achieve their literary dreams."
                 },
                 {
+                    type: "text",
                     client: "Margesh Bhushan Rai",
                     role: "",
                     quote: "My association with Criticspace Journal has been a positive step in my literary career. Authenticity and professionalism make them stand apart."
                 },
                 {
+                    type: "text",
                     client: "Reema Nakra",
                     role: "Author Entrepreneur, Founder, TSMC Delhi",
                     quote: "Aashi and her team do an impressive job of helping authors present their work through professional interviews and articles. I am extremely happy to recommend them."
                 },
                 {
+                    type: "text",
                     client: "Saiyid Safdar Abbas Zaidi",
                     role: "International Author",
                     quote: "Initially I was skeptical, but after experiencing the professionalism and thoughtful interview process, I was deeply impressed. I strongly recommend Criticspace to every author."
                 },
                 {
+                    type: "text",
                     client: "Soham Mukherjee",
                     role: "",
                     quote: "I really enjoyed working with the team. They were efficient, prompt, and maintained excellent communication throughout the entire process."
                 },
                 {
+                    type: "text",
                     client: "Prashant Kaul",
                     role: "",
                     quote: "Their review team provides honest and genuine reviews. My book *Seven* reached bestseller status with their support. I highly recommend Criticspace."
                 },
                 {
+                    type: "text",
                     client: "Sambit Daspatnaik",
                     role: "Best Selling Author",
                     quote: "Criticspace is highly professional and has an excellent review board. Their reviews are comprehensive and thoughtful. I recommend them to every aspiring writer."
                 },
                 {
+                    type: "text",
                     client: "Madhav Thapar",
                     role: "Best Selling Author",
                     quote: "Criticspace is one of the most professional agencies I have worked with while promoting my books. They are unbiased, efficient, and dependable."
                 },
                 {
+                    type: "text",
                     client: "Dr. Vipin Gupta",
                     role: "International Author, California State University",
                     quote: "The team is professional, responsive, and passionate about books. They offer everything an author needs to reach readers effectively."

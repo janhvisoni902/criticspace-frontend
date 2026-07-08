@@ -12,6 +12,16 @@
     
     <!-- Link existing stylesheets -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Synchronously set preliminary navbar font scale to prevent layout pop -->
+    <script>
+        (function() {
+            var w = window.innerWidth;
+            if (w >= 961 && w < 1350) {
+                var scale = Math.max(0.75, Math.min(1.0, 0.78 + ((w - 961) / (1350 - 961)) * 0.22));
+                document.documentElement.style.setProperty('--nav-font-scale', scale.toFixed(3));
+            }
+        })();
+    </script>
 
     <!-- Minimal additional inner page styling -->
     <style>

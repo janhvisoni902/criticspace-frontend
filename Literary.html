@@ -14,6 +14,17 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="vertical-marquee.css">
 
+    <!-- Synchronously set preliminary navbar font scale to prevent layout pop -->
+    <script>
+        (function() {
+            var w = window.innerWidth;
+            if (w >= 961 && w < 1350) {
+                var scale = Math.max(0.75, Math.min(1.0, 0.78 + ((w - 961) / (1350 - 961)) * 0.22));
+                document.documentElement.style.setProperty('--nav-font-scale', scale.toFixed(3));
+            }
+        })();
+    </script>
+
     <!-- Minimal additional inner page styling -->
     <style>
         .vv-breadcrumb-bar {
@@ -118,25 +129,20 @@
 </head>
 <body>
 
-    <!-- 1. NAVBAR -->
-    <header class="vv-navbar" id="navbar">
-        <div class="vv-nav-container">
-            <div style="display: flex; flex-direction: column;">
-                <a href="index.html#hero" class="vv-logo" style="line-height: 1.1;">
-                    <span class="vv-logo-gradient">CRITIC</span>SPACE
+        <!-- 1. NAVBAR -->
+        <header class="vv-navbar" id="navbar">
+            <div class="vv-nav-container">
+                <!-- NEW: Navbar logo image -->
+                <a href="index.html#hero" class="vv-navbar-logo-link">
+                    <div class="vv-navbar-logo-wrapper">
+                        <img src="images/Criticspace_New_Logo.jpg" alt="CriticSpace" class="vv-navbar-logo" onerror="this.parentNode.style.display='none';">
+                    </div>
                 </a>
-                <span style="font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; margin-top: 2px; display: block;">Literary PR & Branding</span>
-            </div>
-            
-            <nav class="vv-nav-menu" id="nav-menu">
-                <a href="index.html#hero">Home</a>
-                <a href="index.html#about">About</a>
-                <a href="index.html#services" class="is-active">Services</a>
-                <a href="index.html#success-stories">Success Stories</a>
-                <a href="index.html#faq">FAQs</a>
-                <a href="index.html#blog">Blog</a>
-                <a href="index.html#contact-section">Contact</a>
-            </nav>
+                
+                <nav class="vv-nav-menu" id="nav-menu">
+                    <!-- Links ... -->
+                </nav>
+                ...
 
             <div class="vv-nav-cta">
                 <a href="#contact-section" class="vv-btn vv-btn-primary">Explore Our Services</a>

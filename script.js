@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="vv-video-card vv-reveal">
                         <span class="vv-video-badge-status">${vid.category}</span>
                         <video class="vv-video-element vv-autoplay-video" 
-                                data-src="${vid.videoUrl}" 
-                                poster="${vid.posterUrl}" 
-                                loop muted playsinline preload="none">
+                               data-src="${vid.videoUrl}" 
+                               poster="${vid.posterUrl}" 
+                               loop muted playsinline preload="none">
                         </video>
                         <div class="vv-video-card-overlay">
                             <h4 class="vv-video-title">${vid.title}</h4>
@@ -259,6 +259,95 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+
+
+    // ----------------------------------------------------
+    // NEW: navbar auto-fit safety net
+    // ----------------------------------------------------
+    const navMenuElement = document.getElementById('nav-menu');
+    const navContainerElement = document.querySelector('.vv-nav-container');
+    const logoLinkElement = document.querySelector('.vv-navbar-logo-link');
+    const navCtaElement = document.querySelector('.vv-nav-cta');
+    const navbarHeaderElement = document.getElementById('navbar');
+
+    const adjustNavbarFit = () => {
+        if (!navMenuElement || !navContainerElement) return;
+
+        // 1. Read synchronized breakpoint from CSS custom property (handling possible null/non-string values safely)
+        const rootStyle = getComputedStyle(document.documentElement);
+        const breakpointVal = rootStyle ? rootStyle.getPropertyValue('--nav-breakpoint') : null;
+        const breakpoint = (breakpointVal && typeof breakpointVal === 'string') ? parseInt(breakpointVal.trim()) || 960 : 960;
+
+        // If screen width is below or equal to mobile breakpoint, reset scale and let media query handle layout
+        if (window.innerWidth <= breakpoint) {
+            document.documentElement.style.setProperty('--nav-font-scale', '1');
+            if (navbarHeaderElement) {
+                navbarHeaderElement.classList.remove('vv-navbar-force-mobile');
+            }
+            return;
+        }
+
+        // 2. Temporarily reset font scale to 1 to measure base states
+        document.documentElement.style.setProperty('--nav-font-scale', '1');
+
+        // Force a layout read of unscaled widths (handling possible null style values safely)
+        const menuWidth = navMenuElement.scrollWidth;
+        const computedContainerStyle = getComputedStyle(navContainerElement);
+        const containerPaddingLeft = computedContainerStyle ? parseFloat(computedContainerStyle.paddingLeft) || 0 : 0;
+        const containerPaddingRight = computedContainerStyle ? parseFloat(computedContainerStyle.paddingRight) || 0 : 0;
+        const containerWidth = navContainerElement.clientWidth - containerPaddingLeft - containerPaddingRight;
+        const logoWidth = logoLinkElement ? logoLinkElement.offsetWidth : 0;
+        const ctaWidth = navCtaElement ? navCtaElement.offsetWidth : 0;
+
+        // Available content width for the menu (with safety margin of 20px)
+        const availableWidth = containerWidth - logoWidth - ctaWidth - 20;
+
+        // Read current base font size (which is the clamp value at current viewport width)
+        const firstLink = navMenuElement.firstElementChild;
+        const computedLinkStyle = firstLink ? getComputedStyle(firstLink) : null;
+        const baseFontSize = computedLinkStyle ? parseFloat(computedLinkStyle.fontSize) : 16;
+
+        // Calculate minimum scale to respect 12px / 0.75rem accessibility floor
+        const minScale = Math.max(0.75, 12 / baseFontSize);
+
+        let scale = 1.0;
+        if (menuWidth > availableWidth) {
+            scale = availableWidth / menuWidth;
+        }
+
+        // Clamp the scale between minScale and 1.0
+        scale = Math.max(minScale, Math.min(1.0, scale));
+
+        // Apply scale
+        document.documentElement.style.setProperty('--nav-font-scale', scale.toFixed(3));
+
+        // 3. If even the minimum legible size still doesn't fit, engage mobile hamburger fallback
+        if (navbarHeaderElement) {
+            if (scale === minScale && (menuWidth * scale > availableWidth)) {
+                navbarHeaderElement.classList.add('vv-navbar-force-mobile');
+            } else {
+                navbarHeaderElement.classList.remove('vv-navbar-force-mobile');
+            }
+        }
+    };
+
+    // Debounce helper to prevent layout thrashing
+    let resizeTimer;
+    const handleNavbarResize = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(adjustNavbarFit, 100);
+    };
+
+    // Initialize auto-fit
+    adjustNavbarFit();
+
+    // Register resize event listener
+    window.addEventListener('resize', handleNavbarResize);
+
+    // Lifecycle cleanup hook for auto-fit navbar listeners
+    window.cleanupNavbarAutoFit = () => {
+        window.removeEventListener('resize', handleNavbarResize);
+    };
 
     // ----------------------------------------------------
     // 3. HAMBURGER MENU & DRAWER TOGGLES
@@ -722,6 +811,104 @@ document.addEventListener('DOMContentLoaded', () => {
     // NEW: Expert Solutions premium interaction END
 
     // NEW: Testimonials 3D Carousel START
+    
+    // Helper class for merging light streams particle animation
+    class TestimonialBgParticle {
+        constructor(streamType, width, height) {
+            this.streamType = streamType;
+            this.reset(width, height, true);
+        }
+
+        reset(width, height, initial = false) {
+            this.width = width;
+            this.height = height;
+            
+            if (this.streamType === 'left') {
+                this.x = initial ? Math.random() * width * 0.6 : 0;
+                this.vx = Math.random() * 1.2 + 0.6;
+            } else {
+                this.x = initial ? width - Math.random() * width * 0.6 : width;
+                this.vx = -(Math.random() * 1.2 + 0.6);
+            }
+
+            this.y = Math.random() * height;
+            this.vy = Math.random() * 0.5 - 0.25;
+            this.size = Math.random() * 2.0 + 1.0;
+            this.maxLife = Math.random() * 200 + 150;
+            this.life = initial ? Math.random() * this.maxLife : this.maxLife;
+            this.targetAlpha = Math.random() * 0.4 + 0.15;
+            this.alpha = 0;
+        }
+
+        update(width, height, time) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const distToCenter = Math.abs(this.x - centerX);
+
+            // Subtle vertical funneling force toward horizontal center to simulate collision
+            if (distToCenter < width * 0.35) {
+                // Wave offset path convergence
+                const wave = Math.sin(this.x * 0.012 + time * 0.003) * 35;
+                const targetY = centerY + wave;
+                this.vy += (targetY - this.y) * 0.015;
+                
+                // Add velocity draft at merge
+                if (this.streamType === 'left') {
+                    this.vx += 0.01;
+                } else {
+                    this.vx -= 0.01;
+                }
+            } else {
+                // Gentle floating wave dynamics
+                this.vy += Math.sin(this.x * 0.01 + time * 0.001) * 0.03;
+            }
+
+            // Clamping speeds
+            this.vx = Math.max(Math.min(this.vx, 3.5), -3.5);
+            this.vy = Math.max(Math.min(this.vy, 1.8), -1.8);
+
+            this.x += this.vx;
+            this.y += this.vy;
+            this.life--;
+
+            // Recycle if particle drifts out or completes its lifespan
+            if (this.life <= 0 || this.x < 0 || this.x > width) {
+                this.reset(width, height);
+            } else {
+                // Fade in / out envelopes
+                if (this.life > this.maxLife * 0.8) {
+                    this.alpha = ((this.maxLife - this.life) / (this.maxLife * 0.2)) * this.targetAlpha;
+                } else if (this.life < this.maxLife * 0.25) {
+                    this.alpha = (this.life / (this.maxLife * 0.25)) * this.targetAlpha;
+                } else {
+                    this.alpha = this.targetAlpha;
+                }
+            }
+        }
+
+        draw(ctx, fadeAlpha) {
+            const finalAlpha = this.alpha * fadeAlpha;
+            if (finalAlpha <= 0) return;
+
+            // Warm violet for left, cool blue-violet for right streams
+            const color = this.streamType === 'left' 
+                ? `rgba(168, 85, 247, ${finalAlpha})` 
+                : `rgba(99, 102, 241, ${finalAlpha})`;
+
+            ctx.beginPath();
+            const grad = ctx.createRadialGradient(
+                this.x, this.y, 0,
+                this.x, this.y, this.size * 2
+            );
+            grad.addColorStop(0, color);
+            grad.addColorStop(1, 'transparent');
+            
+            ctx.fillStyle = grad;
+            ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
     window.initTestimonials3DCarousel = function (data) {
         const viewport = document.getElementById('vv-carousel-viewport');
         const track = document.getElementById('vv-carousel-track');
@@ -755,23 +942,35 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'vv-testimonial-card';
             card.setAttribute('role', 'group');
             card.setAttribute('aria-roledescription', 'slide');
-            card.setAttribute('aria-label', `Testimonial ${index + 1} of ${total}`);
             
-            // Format semantic titles
-            let quoteHtml = item.quote.replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/_(.*?)_/g, '<em>$1</em>');
-            const designationHtml = item.role ? `<span class="vv-testimonial-author-role">${item.role}</span>` : '';
+            // NEW: image-type slide support
+            /* DISABLED: image-type slide rendering branch — superseded by Book Cover Carousel.
+               Re-enable only alongside the testimonialData image entries and styles.
+            if (item.type === 'image') {
+                card.classList.add('vv-testimonial-card-image');
+                card.setAttribute('aria-label', `Slide ${index + 1} of ${total}`);
+                card.innerHTML = `
+                    <img src="${item.src}" alt="${item.alt}" class="vv-testimonial-image" loading="lazy">
+                `;
+            } else {
+            */
+                card.setAttribute('aria-label', `Testimonial ${index + 1} of ${total}`);
+                // Format semantic titles
+                let quoteHtml = item.quote.replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/_(.*?)_/g, '<em>$1</em>');
+                const designationHtml = item.role ? `<span class="vv-testimonial-author-role">${item.role}</span>` : '';
 
-            card.innerHTML = `
-                <div class="vv-testimonial-quote-icon">“</div>
-                <div class="vv-testimonial-text-container">
-                    <p class="vv-testimonial-text">${quoteHtml}</p>
-                    <button class="vv-carousel-read-more" aria-label="Read more testimonial text">Read More</button>
-                </div>
-                <div class="vv-testimonial-author">
-                    <span class="vv-testimonial-author-name">${item.client}</span>
-                    ${designationHtml}
-                </div>
-            `;
+                card.innerHTML = `
+                    <div class="vv-testimonial-quote-icon">“</div>
+                    <div class="vv-testimonial-text-container">
+                        <p class="vv-testimonial-text">${quoteHtml}</p>
+                        <button class="vv-carousel-read-more" aria-label="Read more testimonial text">Read More</button>
+                    </div>
+                    <div class="vv-testimonial-author">
+                        <span class="vv-testimonial-author-name">${item.client}</span>
+                        ${designationHtml}
+                    </div>
+                `;
+            /* } */
             
             track.appendChild(card);
             cardElements.push(card);
@@ -786,7 +985,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Trigger dynamic check for overflow clamp button
         setTimeout(() => {
-            cardElements.forEach(card => {
+            cardElements.forEach((card, index) => {
+                const item = data[index];
+                if (item && item.type !== 'text') return; // Skip image cards
+                
                 const textEl = card.querySelector('.vv-testimonial-text');
                 const readMoreBtn = card.querySelector('.vv-carousel-read-more');
                 if (textEl && readMoreBtn) {
@@ -927,7 +1129,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (window.innerWidth <= 1024) {
                     spacing = 110; // Tablet peeks side elements slightly closer
                 }
-
                 if (absDiff < 1.5 && (window.innerWidth > 768 || absDiff < 0.5)) {
                     /* UPDATED: increased side-card visibility */
                     const scale = isMotionAllowed ? (1 - absDiff * 0.1) : 1;
@@ -1087,10 +1288,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 6000);
         };
 
-        const pointerEventsCleanup = () => {
-            pauseAutoplay();
-        };
-
         const pauseAutoplay = () => {
             if (autoplayTimer) {
                 clearInterval(autoplayTimer);
@@ -1143,6 +1340,110 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTransforms(0);
         resumeAutoplay();
 
+        // Interactive background canvas setup
+        const canvas = document.getElementById('testimonials-canvas');
+        let canvasAnimFrame = null;
+        let canvasObserver = null;
+        let resizeCanvasHandler = null;
+        let handleVisChange = null;
+
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                let dpr = window.devicePixelRatio || 1;
+                let canvasWidth = 0;
+                let canvasHeight = 0;
+                let fadeAlpha = 0;
+                let animTime = 0;
+                let isTabActive = true;
+                let isViewportVisible = false;
+
+                const bgParticles = [];
+                const maxBgParticles = 120;
+
+                resizeCanvasHandler = () => {
+                    if (!canvas) return;
+                    const rect = canvas.getBoundingClientRect();
+                    dpr = window.devicePixelRatio || 1;
+                    canvasWidth = rect.width;
+                    canvasHeight = rect.height;
+                    canvas.width = canvasWidth * dpr;
+                    canvas.height = canvasHeight * dpr;
+                    ctx.scale(dpr, dpr);
+                };
+
+                // Trigger size check initially and register handler
+                resizeCanvasHandler();
+                window.addEventListener('resize', resizeCanvasHandler);
+
+                // Populate particle array
+                for (let i = 0; i < maxBgParticles; i++) {
+                    const stream = i % 2 === 0 ? 'left' : 'right';
+                    bgParticles.push(new TestimonialBgParticle(stream, canvasWidth, canvasHeight));
+                }
+
+                const drawLoop = () => {
+                    if (!isViewportVisible || !isTabActive) return;
+
+                    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                    // screen blending for rich color intersection
+                    ctx.globalCompositeOperation = 'screen';
+
+                    // Slow fade-in transition
+                    if (fadeAlpha < 1.0) {
+                        fadeAlpha += 0.01;
+                    }
+
+                    animTime += 1;
+
+                    bgParticles.forEach(p => {
+                        p.update(canvasWidth, canvasHeight, animTime);
+                        p.draw(ctx, fadeAlpha);
+                    });
+
+                    canvasAnimFrame = requestAnimationFrame(drawLoop);
+                };
+
+                // Pause/play animation loop based on viewport intersection
+                canvasObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        isViewportVisible = entry.isIntersecting;
+                        if (isViewportVisible) {
+                            fadeAlpha = 0; // fade particles on scrolling in
+                            drawLoop();
+                        } else {
+                            if (canvasAnimFrame) {
+                                cancelAnimationFrame(canvasAnimFrame);
+                            }
+                        }
+                    });
+                }, { threshold: 0.05 });
+
+                canvasObserver.observe(canvas);
+
+                // Pause/play loop based on tab active visibility state
+                handleVisChange = () => {
+                    isTabActive = !document.hidden;
+                    if (isTabActive && isViewportVisible) {
+                        drawLoop();
+                    } else {
+                        if (canvasAnimFrame) {
+                            cancelAnimationFrame(canvasAnimFrame);
+                        }
+                    }
+                };
+                document.addEventListener('visibilitychange', handleVisChange);
+            } else {
+                // Degradation fallback to CSS gradient
+                canvas.style.display = 'none';
+                const section = document.getElementById('success-stories');
+                if (section) {
+                    section.style.background = 'radial-gradient(circle at center, rgba(168, 85, 247, 0.15), #050508 80%)';
+                }
+            }
+        }
+
         // Lifecycle cleanup registrar to prevent memory leak states
         window.cleanupTestimonials3DCarousel = () => {
             pauseAutoplay();
@@ -1173,6 +1474,20 @@ document.addEventListener('DOMContentLoaded', () => {
             window.removeEventListener('resize', handleResize);
             modalCloseBtn.removeEventListener('click', closeModal);
             modalOverlay.removeEventListener('click', closeModal);
+
+            // Canvas resources cleanup
+            if (resizeCanvasHandler) {
+                window.removeEventListener('resize', resizeCanvasHandler);
+            }
+            if (handleVisChange) {
+                document.removeEventListener('visibilitychange', handleVisChange);
+            }
+            if (canvasObserver) {
+                canvasObserver.disconnect();
+            }
+            if (canvasAnimFrame) {
+                cancelAnimationFrame(canvasAnimFrame);
+            }
         };
     };
 
