@@ -2564,3 +2564,12 @@ a {
     }
 }
 /* NEW: Testimonials 3D Carousel END */
+
+@media (min-width: 769px) {
+    /* FIX: blog grid desktop columns — new additive class, no existing rules modified */
+    .vv-blog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+}

@@ -21,12 +21,12 @@
         <div class="vv-nav-container">
             <nav class="vv-nav-menu" id="nav-menu">
                 <a href="#hero" class="is-active">Home</a>
-                <a href="BookMarketing.html">Book Marketing</a>
-                <a href="AuthorBrandling.html">Author Branding</a>
-                <a href="PR&Media.html">PR & Media</a>
-                <a href="Digital Marketing.html">Digital Marketing</a>
-                <a href="Autho design.html">Website Designing</a>
-                <a href="Literary.html">Literary Magazine</a>
+                <a href="book-marketing.html">Book Marketing</a>
+                <a href="author-branding.html">Author Branding</a>
+                <a href="pr-media.html">PR & Media</a>
+                <a href="digital-marketing.html">Digital Marketing</a>
+                <a href="website-designing.html">Website Designing</a>
+                <a href="literary-magazine.html">Literary Magazine</a>
                 <a href="#about">About</a>
                 <a href="#faq">FAQs</a>
                 <a href="#blog">Blog</a>
@@ -47,12 +47,12 @@
     <div class="vv-mobile-drawer" id="mobile-drawer">
         <nav class="vv-mobile-nav" id="mobile-nav">
             <a href="#hero" class="is-active">Home</a>
-            <a href="BookMarketing.html">Book Marketing</a>
-            <a href="AuthorBrandling.html">Author Branding</a>
-            <a href="PR&Media.html">PR & Media</a>
-            <a href="Digital Marketing.html">Digital Marketing</a>
-            <a href="Autho design.html">Website Designing</a>
-            <a href="Literary.html">Literary Magazine</a>
+            <a href="book-marketing.html">Book Marketing</a>
+            <a href="author-branding.html">Author Branding</a>
+            <a href="pr-media.html">PR & Media</a>
+            <a href="digital-marketing.html">Digital Marketing</a>
+            <a href="website-designing.html">Website Designing</a>
+            <a href="literary-magazine.html">Literary Magazine</a>
             <a href="#about">About</a>
             <a href="#faq">FAQs</a>
             <a href="#blog">Blog</a>
@@ -218,7 +218,7 @@
                             <li><span class="bullet">•</span> Reader Engagement Campaigns</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="BookMarketing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="book-marketing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -237,7 +237,7 @@
                             <li><span class="bullet">•</span> Public Speaking Branding</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="AuthorBrandling.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="author-branding.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -256,7 +256,7 @@
                             <li><span class="bullet">•</span> Literary Features</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="PR&Media.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="pr-media.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -275,7 +275,7 @@
                             <li><span class="bullet">•</span> Influencer Marketing</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="Digital Marketing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="digital-marketing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -294,7 +294,7 @@
                             <li><span class="bullet">•</span> Landing Page Development</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="Autho design.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="website-designing.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
 
@@ -314,7 +314,7 @@
                             <li><span class="bullet">•</span> Anthologies</li>
                         </ul>
                         <div class="vv-submenu-footer">
-                            <a href="Literary.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
+                            <a href="literary-magazine.html" class="vv-submenu-link">Learn More <span class="arrow">➔</span></a>
                         </div>
                     </div>
                 </div>
@@ -375,6 +375,8 @@
 
         <!-- NEW: Testimonials 3D Carousel START -->
         <section class="vv-showcase-section vv-bg-alt" id="success-stories" aria-roledescription="carousel" aria-label="Client Testimonials">
+            <!-- Canvas background for interactive merging light-streams -->
+            <canvas id="testimonials-canvas" class="vv-testimonials-canvas" aria-hidden="true"></canvas>
             <div class="vv-container">
                 <div class="vv-section-header">
                     <span class="vv-eyebrow">CLIENT TESTIMONIALS</span>
@@ -606,7 +608,8 @@
                 </div>
 
                 <!-- Blog Grid -->
-                <div class="vv-video-grid" style="grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem;">
+                <!-- FIX: removed inline grid-template-columns overriding mobile responsiveness -->
+                <div class="vv-video-grid vv-blog-grid">
                     
                     <div class="vv-step-card vv-glass-card" style="flex-direction: column; padding: 2rem;">
                         <span style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 0.5rem;">Marketing</span>
@@ -710,12 +713,12 @@
                     <div class="vv-footer-col">
                         <h4>Services</h4>
                         <ul>
-                            <li><a href="BookMarketing.html">Book Marketing</a></li>
-                            <li><a href="AuthorBrandling.html">Author Branding</a></li>
-                            <li><a href="PR&Media.html">PR & Media</a></li>
-                            <li><a href="Digital Marketing.html">Digital Marketing</a></li>
-                            <li><a href="Autho design.html">Website Designing</a></li>
-                            <li><a href="l">Literary Magazine</a></li>
+                            <li><a href="book-marketing.html">Book Marketing</a></li>
+                            <li><a href="author-branding.html">Author Branding</a></li>
+                            <li><a href="pr-media.html">PR & Media</a></li>
+                            <li><a href="digital-marketing.html">Digital Marketing</a></li>
+                            <li><a href="website-designing.html">Website Designing</a></li>
+                            <li><a href="literary-magazine.html">Literary Magazine</a></li>
                         </ul>
                     </div>
                     <div class="vv-footer-col">
