@@ -2197,6 +2197,11 @@ a {
         width: 100% !important;
         transform: none !important;
         margin: 0 !important;
+        /* FIX: Expert Solutions mobile card content clipping — ensure card height grows naturally, prevent flexbox bottom-alignment clipping, and optimize mobile padding */
+        height: auto !important;
+        min-height: auto !important;
+        justify-content: flex-start !important;
+        padding: 1.8rem 1.5rem !important;
     }
 
     .vv-bento-card:active {
