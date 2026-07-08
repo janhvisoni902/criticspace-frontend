@@ -276,18 +276,30 @@ a {
     -webkit-text-fill-color: transparent;
 }
 
-.vv-nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem; /* [ADDED FOR RESPONSIVENESS] Reduced gap to fit all 11 navbar links on one line */
+@media (min-width: 901px) {
+    .vv-nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem; /* Standard readable spacing */
+    }
+
+    .vv-nav-menu a {
+        color: var(--text-muted);
+        font-size: 1.2rem; /* Larger, prominent navbar link size */
+        font-weight: 600; /* Bolder font for prominence */
+        position: relative;
+        white-space: nowrap;
+    }
 }
 
-.vv-nav-menu a {
-    color: var(--text-muted);
-    font-size: 0.82rem; /* [ADDED FOR RESPONSIVENESS] Smaller font size to fit 11 links on desktop viewport */
-    font-weight: 600;
-    position: relative;
-    white-space: nowrap; /* [ADDED FOR RESPONSIVENESS] Prevent navbar link items from wrapping internally */
+/* Media query to scale down navbar menu slightly on smaller desktops to prevent clipping */
+@media (max-width: 1350px) and (min-width: 901px) {
+    .vv-nav-menu {
+        gap: 1.1rem;
+    }
+    .vv-nav-menu a {
+        font-size: 0.98rem;
+    }
 }
 
 .vv-nav-menu a:hover,
@@ -781,6 +793,23 @@ a {
 ---------------------------------------------------- */
 .vv-showcase-section {
     padding: 8rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.vv-showcase-section .vv-container {
+    position: relative;
+    z-index: 1;
+}
+
+.vv-testimonials-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .vv-video-grid {
