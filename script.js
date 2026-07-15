@@ -346,12 +346,14 @@ if (isHomePage && navMenu && navMenu.children.length === 0 && data.navigation) {
     // Initialize auto-fit
     adjustNavbarFit();
 
-    // Register resize event listener
+    // Register resize and load event listeners
     window.addEventListener('resize', handleNavbarResize);
+    window.addEventListener('load', adjustNavbarFit);
 
     // Lifecycle cleanup hook for auto-fit navbar listeners
     window.cleanupNavbarAutoFit = () => {
         window.removeEventListener('resize', handleNavbarResize);
+        window.removeEventListener('load', adjustNavbarFit);
     };
 
     // ----------------------------------------------------
@@ -897,8 +899,8 @@ if (isHomePage && navMenu && navMenu.children.length === 0 && data.navigation) {
 
             // Warm violet for left, cool blue-violet for right streams
             const color = this.streamType === 'left' 
-                ? `rgba(168, 85, 247, ${finalAlpha})` 
-                : `rgba(99, 102, 241, ${finalAlpha})`;
+                ? `rgba(157, 69, 239, ${finalAlpha})` 
+                : `rgba(238, 208, 62, ${finalAlpha})`;
 
             ctx.beginPath();
             const grad = ctx.createRadialGradient(
@@ -1444,7 +1446,7 @@ if (isHomePage && navMenu && navMenu.children.length === 0 && data.navigation) {
                 canvas.style.display = 'none';
                 const section = document.getElementById('success-stories');
                 if (section) {
-                    section.style.background = 'radial-gradient(circle at center, rgba(168, 85, 247, 0.15), #050508 80%)';
+                    section.style.background = 'radial-gradient(circle at center, rgba(157, 69, 239, 0.15), #050508 80%)';
                 }
             }
         }

@@ -7,21 +7,24 @@
    1. DESIGN SYSTEM & VARIABLE DEFINITIONS
 ---------------------------------------------------- */
 :root {
-    /* Color Palette */
-    --bg-dark: #050508;
-    --bg-card: rgba(13, 14, 24, 0.65);
-    --bg-card-hover: rgba(22, 24, 41, 0.85);
-    --border-color: rgba(255, 255, 255, 0.07);
-    --border-glow: rgba(99, 102, 241, 0.15);
+    /* Color Palette - Premium Soft Light Theme */
+    --bg-dark: #ffffff;          /* Soft light neutral/grey page background */
+    --bg-card: #ddcfe2;          /* Pure white card backgrounds (makes bento elements pop!) */
+    --bg-card-hover: #967ea7;    /* Maintain white hover backdrop */
+    --border-color: rgba(210, 164, 55, 0.06); /* Delicate light border */
     
-    --primary: #eed03e;          /* Indigo */
-    --secondary: #9d45ef;        /* Purple */
-    --accent: #d9bddc;           /* Cyan */
-    --text-main: #f3f4f6;        /* Light Grey */
-    --text-muted: #9ca3af;       /* Grey */
+    --primary: #b59410;          /* Rich gold (deeper for high readability on white) */
+    --primary-rgb: 181, 148, 96;
+    --secondary: #8d62d2;        /* Premium violet purple */
+    --secondary-rgb: 109, 40, 217;
+    --accent: #4c1d95;           /* Deep violet for badge labels */
+    --accent-rgb: 76, 29, 149;
+    --text-main: #0f172a;        /* Slate 900 for body text and headers */
+    --text-muted: #475569;       /* Slate 600 for secondary descriptions */
     
+    --border-glow: rgba(var(--primary-rgb), 0.12);
     --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
-    --gradient-glow: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(168, 85, 247, 0.4));
+    --gradient-glow: linear-gradient(135deg, rgba(var(--primary-rgb), 0.15), rgba(var(--secondary-rgb), 0.15));
     
     /* Layout Constants */
     --container-width: 1200px;
@@ -114,7 +117,7 @@ a {
 }
 
 .vv-glass-card:hover {
-    border-color: rgba(99, 102, 241, 0.3);
+    border-color: rgba(var(--primary-rgb), 0.3);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--border-glow);
     transform: translateY(-4px);
     background: var(--bg-card-hover);
@@ -141,41 +144,34 @@ a {
     max-width: 100%;
     white-space: normal;
     text-align: center;
-}
-
-.vv-btn-primary {
+}.vv-btn-primary {
     background: var(--gradient-primary);
     color: #fff;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.25);
 }
 
 .vv-btn-primary:hover {
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6), 0 0 15px rgba(168, 85, 247, 0.4);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4), 0 0 15px rgba(var(--secondary-rgb), 0.25);
     transform: scale(1.02);
 }
 
 .vv-btn-outline {
     background: transparent;
     border-color: var(--primary);
-    color: #fff;
+    color: var(--primary);
 }
 
 .vv-btn-outline:hover {
-    background: rgba(99, 102, 241, 0.1);
+    background: rgba(var(--primary-rgb), 0.08);
     border-color: var(--secondary);
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+    color: var(--secondary);
+    box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.12);
 }
 
 .vv-btn-block {
     width: 100%;
 }
 
-/* Gradient elements */
-.vv-gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
 .vv-eyebrow {
     font-size: 0.85rem;
@@ -196,7 +192,7 @@ a {
 .vv-section-title {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #fff;
+    color: var(--text-main);
 }
 
 .vv-section-desc {
@@ -206,7 +202,7 @@ a {
 }
 
 .vv-bg-alt {
-    background: #090a10;
+    background: #ffffff;
 }
 
 /* Scroll-triggered reveal entrance classes */
@@ -264,7 +260,7 @@ a {
     font-size: 1.6rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
-    color: #fff;
+    color: var(--text-main);
 }
 
 .vv-logo-gradient {
@@ -300,7 +296,7 @@ a {
 
 .vv-nav-menu a:hover,
 .vv-nav-menu a.is-active {
-    color: #fff;
+    color: var(--text-main);
 }
 
 .vv-nav-menu a::after {
@@ -319,10 +315,133 @@ a {
     width: 100%;
 }
 
+/* Navigation Dropdown Menu (Desktop Hover & Mobile Accordion) */
+.vv-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.vv-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.vv-dropdown-trigger span.chevron {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+.vv-dropdown:hover .vv-dropdown-trigger span.chevron {
+    transform: rotate(180deg);
+}
+
+.vv-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius, 12px);
+    padding: 0.75rem 0;
+    min-width: 160px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    z-index: 110;
+}
+
+.vv-dropdown:hover .vv-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(5px);
+}
+
+.vv-dropdown-menu a {
+    display: block !important;
+    padding: 0.6rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    color: var(--text-muted) !important;
+    text-align: left;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.vv-dropdown-menu a:hover {
+    color: var(--primary) !important;
+    background: rgba(var(--primary-rgb), 0.06);
+}
+
+/* Dropdown underline prevention for trigger and menu links */
+.vv-nav-menu .vv-dropdown a::after {
+    display: none !important;
+}
+
+/* Mobile Drawer Dropdown Accordion */
+.vv-mobile-dropdown {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.vv-mobile-dropdown-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-muted);
+    padding: 0.5rem 0;
+}
+
+.vv-mobile-dropdown-trigger span.chevron {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.vv-mobile-dropdown.is-open .vv-mobile-dropdown-trigger span.chevron {
+    transform: rotate(180deg);
+}
+
+.vv-mobile-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-left: 1.2rem;
+    border-left: 1px solid var(--border-color);
+    margin: 0.4rem 0 0.8rem 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s, visibility 0.3s;
+}
+
+.vv-mobile-dropdown.is-open .vv-mobile-dropdown-menu {
+    max-height: 250px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.vv-mobile-dropdown-menu a {
+    font-size: 1.05rem !important;
+    padding: 0.3rem 0 !important;
+    border-left: none !important;
+    padding-left: 0 !important;
+}
+
 .vv-nav-cta {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.vv-navbar .vv-btn {
+    white-space: nowrap;
 }
 
 /* Hamburger toggle */
@@ -363,11 +482,11 @@ a {
     position: fixed;
     top: 0;
     right: -320px;
-    width: 300px;
+    width: 320px;
     height: 100vh;
-    background: #090a10;
+    background: var(--bg-card);
     z-index: 1050;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    box-shadow: -10px 0 30px rgba(15, 23, 42, 0.08);
     padding: 6rem 2rem 2rem 2rem;
     transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     display: flex;
@@ -393,7 +512,7 @@ a {
 
 .vv-mobile-nav a:hover,
 .vv-mobile-nav a.is-active {
-    color: #fff;
+    color: var(--text-main);
     padding-left: 8px;
     border-left: 3px solid var(--primary);
 }
@@ -466,8 +585,8 @@ a {
 }
 
 .vv-badge-eyebrow {
-    background: rgba(99, 102, 241, 0.15);
-    border: 1px solid rgba(99, 102, 241, 0.3);
+    background: rgba(var(--primary-rgb), 0.15);
+    border: 1px solid rgba(var(--primary-rgb), 0.3);
     color: var(--accent);
     font-size: 0.85rem;
     font-weight: 600;
@@ -482,7 +601,7 @@ a {
     font-size: 4rem;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    color: #fff;
+    color: var(--text-main);
 }
 
 .vv-hero-subtitle {
@@ -505,7 +624,7 @@ a {
 }
 
 .vv-press-link {
-    color: #fff;
+    color: var(--text-main);
     text-decoration: underline;
     font-weight: 500;
 }
@@ -561,8 +680,8 @@ a {
 }
 
 .vv-marquee-card:hover {
-    background: rgba(99, 102, 241, 0.1);
-    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(var(--primary-rgb), 0.1);
+    border-color: rgba(var(--primary-rgb), 0.4);
     transform: scale(1.03);
 }
 
@@ -583,7 +702,7 @@ a {
 .vv-marquee-info {
     font-size: 0.85rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-main);
     white-space: nowrap;
 }
 
@@ -594,9 +713,9 @@ a {
 }
 
 .vv-marquee-label {
-    background: rgba(168, 85, 247, 0.2);
-    border: 1px solid rgba(168, 85, 247, 0.4);
-    color: #df97ff;
+    background: rgba(var(--secondary-rgb), 0.2);
+    border: 1px solid rgba(var(--secondary-rgb), 0.4);
+    color: var(--secondary);
     padding: 0.1rem 0.6rem;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -618,7 +737,7 @@ a {
 ---------------------------------------------------- */
 .vv-stats-section {
     padding: 6rem 0;
-    background: #050508;
+    background: var(--bg-dark);
 }
 
 .vv-stats-grid {
@@ -644,7 +763,7 @@ a {
 
 .vv-stat-label {
     font-weight: 600;
-    color: #fff;
+    color: var(--text-main);
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
     display: block;
@@ -768,7 +887,7 @@ a {
 
 .vv-press-card h4 {
     font-size: 1.15rem;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 0.5rem;
 }
 
@@ -826,7 +945,7 @@ a {
     border-radius: var(--border-radius);
     overflow: hidden;
     aspect-ratio: 9/16;
-    background: #090a10;
+    background: var(--bg-card);
     border: 1px solid var(--border-color);
 }
 
@@ -874,7 +993,7 @@ a {
 }
 
 .vv-video-title {
-    color: #fff;
+    color: var(--text-main);
     font-size: 1rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
@@ -917,7 +1036,7 @@ a {
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
 }
 
 .vv-stepper-progress-info {
@@ -928,7 +1047,7 @@ a {
 .vv-stepper-progress {
     font-size: 1.3rem;
     font-weight: 800;
-    color: #fff;
+    color: var(--text-main);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -978,7 +1097,7 @@ a {
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: #1f2833;
+    background: #cbd5e1;
     border: 2px solid var(--border-color);
     cursor: pointer;
     transition: var(--transition);
@@ -1035,8 +1154,8 @@ a {
 }
 
 .vv-step-card.is-active {
-    border-color: rgba(99, 102, 241, 0.4);
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+    border-color: rgba(var(--primary-rgb), 0.4);
+    box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.15);
     background: rgba(22, 24, 41, 0.6);
 }
 
@@ -1063,7 +1182,7 @@ a {
 
 .vv-step-content-col h3 {
     font-size: 1.5rem;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 0.8rem;
 }
 
@@ -1078,12 +1197,12 @@ a {
     margin-top: 5rem;
     padding: 4rem;
     text-align: center;
-    border-color: rgba(99, 102, 241, 0.2);
+    border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 .vv-banner-title {
     font-size: 2.2rem;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 1rem;
 }
 
@@ -1146,7 +1265,7 @@ a {
 /* Featured card glow borders */
 .vv-pricing-card.is-featured {
     border-color: var(--primary);
-    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.25), 0 0 20px rgba(168, 85, 247, 0.15);
+    box-shadow: 0 10px 40px rgba(var(--primary-rgb), 0.25), 0 0 20px rgba(var(--secondary-rgb), 0.15);
     background: rgba(17, 18, 36, 0.95);
     transform: scale(1.03);
 }
@@ -1161,7 +1280,7 @@ a {
 
 .vv-price-header h3 {
     font-size: 1.6rem;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 0.5rem;
 }
 
@@ -1183,7 +1302,7 @@ a {
     font-size: 3rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
-    color: #fff;
+    color: var(--text-main);
 }
 
 .vv-price-row .period {
@@ -1326,14 +1445,14 @@ a {
 }
 
 .vv-accordion-item:hover {
-    border-color: rgba(99, 102, 241, 0.25);
+    border-color: rgba(var(--primary-rgb), 0.25);
 }
 
 .vv-accordion-trigger {
     width: 100%;
     background: transparent;
     border: none;
-    color: #fff;
+    color: var(--text-main);
     font-family: 'Poppins', sans-serif;
     font-size: 1.15rem;
     font-weight: 600;
@@ -1388,7 +1507,7 @@ a {
 
 .vv-faq-footer-info h4 {
     font-size: 1.4rem;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 0.5rem;
 }
 
@@ -1425,7 +1544,7 @@ a {
 
 .vv-card-title {
     font-size: 1.8rem;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 0.5rem;
 }
 
@@ -1458,11 +1577,11 @@ a {
 .vv-form-group input,
 .vv-form-group select,
 .vv-form-group textarea {
-    background: rgba(5, 5, 8, 0.7);
+    background: #ffffff;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 0.8rem 1rem;
-    color: #fff;
+    color: var(--text-main);
     font-family: inherit;
     font-size: 0.95rem;
     transition: var(--transition);
@@ -1475,7 +1594,7 @@ a {
 .vv-form-group select:focus,
 .vv-form-group textarea:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.2);
     outline: none;
 }
 
@@ -1483,9 +1602,8 @@ a {
 .vv-form-group input:-webkit-autofill,
 .vv-form-group textarea:-webkit-autofill,
 .vv-form-group select:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #0a0a0f inset !important;
-    -webkit-text-fill-color: #fff !important;
-    border: 1px solid var(--primary);
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: var(--text-main) !important;
 }
 
 /* Checkbox alignment */
@@ -1546,8 +1664,8 @@ a {
 }
 
 .vv-slot-btn {
-    background: rgba(99, 102, 241, 0.12);
-    border: 1px solid rgba(99, 102, 241, 0.3);
+    background: rgba(var(--primary-rgb), 0.12);
+    border: 1px solid rgba(var(--primary-rgb), 0.3);
     color: var(--accent);
     padding: 0.5rem 1.2rem;
     border-radius: 8px;
@@ -1566,7 +1684,7 @@ a {
    15. FOOTER STYLING
 ---------------------------------------------------- */
 .vv-footer {
-    background: #030305;
+    background: #f8fafc;
     border-top: 1px solid var(--border-color);
     padding: 6rem 0 2rem 0;
 }
@@ -2048,7 +2166,7 @@ a {
 }
 
 @media (min-width: 769px) {
-    .vv-bento-grid {
+    #services .vv-bento-grid {
         position: relative;
         height: 720px; /* High container bounds for absolute placement */
         width: 100%;
@@ -2058,7 +2176,7 @@ a {
         perspective: 1200px;
     }
 
-    .vv-bento-card {
+    #services .vv-bento-card {
         position: absolute;
         transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
                     box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -2070,7 +2188,7 @@ a {
     }
 
     /* Individual Card Placements and default Rotations */
-    .vv-bento-card:nth-child(1) {
+    #services .vv-bento-card:nth-child(1) {
         top: 8%;
         left: 4%;
         width: 42%;
@@ -2078,7 +2196,7 @@ a {
         transform: rotate(-1.5deg);
     }
 
-    .vv-bento-card:nth-child(2) {
+    #services .vv-bento-card:nth-child(2) {
         top: 4%;
         left: 48%;
         width: 24%;
@@ -2086,7 +2204,7 @@ a {
         transform: rotate(1deg);
     }
 
-    .vv-bento-card:nth-child(3) {
+    #services .vv-bento-card:nth-child(3) {
         top: 45%;
         left: 43%;
         width: 25%;
@@ -2094,7 +2212,7 @@ a {
         transform: rotate(-2deg);
     }
 
-    .vv-bento-card:nth-child(4) {
+    #services .vv-bento-card:nth-child(4) {
         top: 42%;
         left: 2%;
         width: 39%;
@@ -2102,7 +2220,7 @@ a {
         transform: rotate(1.5deg);
     }
 
-    .vv-bento-card:nth-child(5) {
+    #services .vv-bento-card:nth-child(5) {
         top: 14%;
         left: 74%;
         width: 24%;
@@ -2110,7 +2228,7 @@ a {
         transform: rotate(-1deg);
     }
 
-    .vv-bento-card:nth-child(6) {
+    #services .vv-bento-card:nth-child(6) {
         top: 46%;
         left: 70%;
         width: 28%;
@@ -2150,32 +2268,32 @@ a {
         100% { transform: translate3d(0, 0, 0) rotate(2deg); }
     }
 
-    .vv-bento-card.is-floating-1 { animation: float-card-1 8s ease-in-out infinite; }
-    .vv-bento-card.is-floating-2 { animation: float-card-2 7.5s ease-in-out infinite; }
-    .vv-bento-card.is-floating-3 { animation: float-card-3 9s ease-in-out infinite; }
-    .vv-bento-card.is-floating-4 { animation: float-card-4 8.5s ease-in-out infinite; }
-    .vv-bento-card.is-floating-5 { animation: float-card-5 7.8s ease-in-out infinite; }
-    .vv-bento-card.is-floating-6 { animation: float-card-6 9.5s ease-in-out infinite; }
+    #services .vv-bento-card.is-floating-1 { animation: float-card-1 8s ease-in-out infinite; }
+    #services .vv-bento-card.is-floating-2 { animation: float-card-2 7.5s ease-in-out infinite; }
+    #services .vv-bento-card.is-floating-3 { animation: float-card-3 9s ease-in-out infinite; }
+    #services .vv-bento-card.is-floating-4 { animation: float-card-4 8.5s ease-in-out infinite; }
+    #services .vv-bento-card.is-floating-5 { animation: float-card-5 7.8s ease-in-out infinite; }
+    #services .vv-bento-card.is-floating-6 { animation: float-card-6 9.5s ease-in-out infinite; }
 }
 
 /* Common interactive properties */
-.vv-bento-card.is-hovered {
+#services .vv-bento-card.is-hovered {
     z-index: 20 !important; /* Elevated stacking context */
     animation: none !important; /* Suspend float cycle */
     background: var(--bg-card-hover);
-    border-color: rgba(168, 85, 247, 0.4); /* purple tint */
+    border-color: rgba(var(--secondary-rgb), 0.4); /* purple tint */
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 
-                0 0 30px rgba(168, 85, 247, 0.3), /* purple glow */
-                0 0 60px rgba(0, 242, 254, 0.15);  /* accent blue glow */
+                0 0 30px rgba(var(--secondary-rgb), 0.3), /* purple glow */
+                0 0 60px rgba(var(--accent-rgb), 0.15);  /* accent blue glow */
 }
 
 /* Keyboard accessibility focus states */
-.vv-bento-card:focus-visible {
+#services .vv-bento-card:focus-visible {
     outline: none;
     z-index: 20 !important;
     background: var(--bg-card-hover);
     border-color: var(--accent);
-    box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+    box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.4);
     transform: translateY(-8px) scale(1.03);
 }
 
@@ -2206,18 +2324,18 @@ a {
     .vv-bento-card:active {
         transform: scale(0.98) !important;
         border-color: var(--primary) !important;
-        box-shadow: 0 0 20px rgba(99, 102, 241, 0.3) !important;
+        box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.3) !important;
     }
 }
 
 /* Accessibility requests */
 @media (prefers-reduced-motion: reduce) {
-    .vv-bento-card {
+    #services .vv-bento-card {
         animation: none !important;
         transition: none !important;
         transform: none !important;
     }
-    .vv-bento-card.is-hovered, .vv-bento-card:focus-visible {
+    #services .vv-bento-card.is-hovered, #services .vv-bento-card:focus-visible {
         transform: none !important;
         box-shadow: none !important;
         border-color: var(--primary) !important;
@@ -2294,7 +2412,7 @@ a {
     font-size: 4rem;
     line-height: 0.2;
     font-family: Georgia, serif;
-    background: var(--gradient-primary, linear-gradient(135deg, #6366f1, #a855f7));
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     opacity: 0.3;
@@ -2324,14 +2442,14 @@ a {
 
 .vv-testimonial-text em {
     font-style: italic;
-    color: var(--accent, #00f2fe);
+    color: var(--accent);
 }
 
 /* Truncation Trigger Button */
 .vv-carousel-read-more {
     background: transparent;
     border: none;
-    color: var(--primary, #6366f1);
+    color: var(--primary);
     font-family: inherit;
     font-size: 0.85rem;
     font-weight: 600;
@@ -2346,7 +2464,7 @@ a {
 
 .vv-carousel-read-more:hover,
 .vv-carousel-read-more:focus-visible {
-    color: var(--accent, #00f2fe);
+    color: var(--accent);
     outline: none;
 }
 
@@ -2374,9 +2492,9 @@ a {
 
 /* Active State Custom Glow and Idle Float */
 @keyframes vv-carousel-glow {
-    0% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(168, 85, 247, 0.25); }
-    50% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 35px rgba(168, 85, 247, 0.45), 0 0 50px rgba(99, 102, 241, 0.15); }
-    100% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(168, 85, 247, 0.25); }
+    0% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(var(--secondary-rgb), 0.25); }
+    50% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 35px rgba(var(--secondary-rgb), 0.45), 0 0 50px rgba(var(--primary-rgb), 0.15); }
+    100% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(var(--secondary-rgb), 0.25); }
 }
 
 @keyframes vv-carousel-drift {
@@ -2386,7 +2504,7 @@ a {
 }
 
 .vv-testimonial-card.is-active {
-    border-color: rgba(168, 85, 247, 0.45); /* purple tint */
+    border-color: rgba(var(--secondary-rgb), 0.45); /* purple tint */
     animation: vv-carousel-glow 6s ease-in-out infinite;
 }
 
@@ -2422,7 +2540,7 @@ a {
 @media (hover: hover) {
     .vv-testimonial-card.is-active:hover {
         transform: translate3d(0px, -8px, 20px) scale(1.05) !important;
-        border-color: var(--accent, #00f2fe);
+        border-color: var(--accent);
     }
 }
 
@@ -2453,9 +2571,9 @@ a {
 
 .vv-carousel-btn:hover,
 .vv-carousel-btn:focus-visible {
-    background: var(--gradient-primary, linear-gradient(135deg, #6366f1, #a855f7));
+    background: var(--gradient-primary);
     border-color: transparent;
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 15px rgba(var(--secondary-rgb), 0.3);
     outline: none;
 }
 
@@ -2475,14 +2593,14 @@ a {
 }
 
 .vv-carousel-dot.is-active {
-    background: var(--primary, #6366f1);
-    box-shadow: 0 0 10px var(--primary, #6366f1);
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
     transform: scale(1.3);
 }
 
 /* Focus styling for card keyboard navigation */
 .vv-testimonial-card:focus-visible {
-    outline: 2px solid var(--accent, #00f2fe);
+    outline: 2px solid var(--accent);
     outline-offset: 4px;
 }
 
@@ -2519,7 +2637,7 @@ a {
     padding: 3.5rem 3rem 3rem 3rem;
     position: relative;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8),
-                0 0 35px rgba(168, 85, 247, 0.2);
+                0 0 35px rgba(var(--secondary-rgb), 0.2);
     transform: scale(0.9);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -2561,7 +2679,7 @@ a {
 
 .vv-carousel-modal-quote em {
     font-style: italic;
-    color: var(--accent, #00f2fe);
+    color: var(--accent);
 }
 
 /* Reduced motion requests */
@@ -2616,7 +2734,7 @@ a {
 
 .vv-navbar-logo-link:hover .vv-navbar-logo-wrapper {
     border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.45);
+    box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.45);
     transform: translateY(-1px);
 }
 
@@ -2679,30 +2797,32 @@ a {
 }
 
 .vv-book-cover-card {
-    background: var(--bg-card, rgba(13, 14, 24, 0.65));
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius, 16px);
-    width: 160px;
-    height: 240px;
+    width: 210px;
+    height: 315px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     transition: var(--transition);
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    will-change: transform, box-shadow;
+    will-change: transform;
 }
 
 .vv-book-cover-card:hover {
-    border-color: rgba(99, 102, 241, 0.35);
-    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
-    transform: translateY(-4px);
+    transform: translateY(-6px);
 }
 
 .vv-book-cover-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
+    border-radius: 4px; /* Crisp, natural book edge corner radius */
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12); /* Soft shadow framing */
+    border: 1px solid rgba(15, 23, 42, 0.06); /* Soft border framing */
+    transition: var(--transition);
+}
+
+.vv-book-cover-card:hover .vv-book-cover-image {
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.2), 0 0 15px rgba(var(--primary-rgb), 0.2);
+    border-color: rgba(var(--primary-rgb), 0.35);
 }
